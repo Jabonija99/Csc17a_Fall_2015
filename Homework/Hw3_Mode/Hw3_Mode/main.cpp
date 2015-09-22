@@ -15,6 +15,7 @@ int *findMode(int array[], int aSize, int &modSize);
 /*** Finds the mode(s) of an array then inputs it into a dynamic array
  * @param array - an array of random numbers
  * @param aSize - the size of the array
+ * @param modSize - size of the mode array
  * returns the pointer of mode(s)*/
 void fillArray(int[], int); //Fills the array with values (0-4)
 void outArray(int *, int); //Outputs the array
@@ -30,8 +31,6 @@ int main(int argc, char** argv) {
     bool error = false; //Flag for invalid input
     
     srand(time(0)); //Timer for true random
-    
-    //Prompt to input size of the Array 
     
     do{
         if(error){ //If there is an invalid input
