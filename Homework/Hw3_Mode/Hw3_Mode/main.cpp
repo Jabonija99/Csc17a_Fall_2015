@@ -16,7 +16,7 @@ int *findMode(int array[], int aSize, int &modSize);
  * @param array - an array of random numbers
  * @param aSize - the size of the array
  * returns the pointer of mode(s)*/
-void fillArray(int[], int); //Fills the array with random values
+void fillArray(int[], int); //Fills the array with values (0-4)
 void outArray(int *, int); //Outputs the array
 
 /*
@@ -24,13 +24,37 @@ void outArray(int *, int); //Outputs the array
  */
 
 int main(int argc, char** argv) {
-    int aSize = 20; //Size of the array of numbers
+    int aCap = 100, aSize = 0; //Capacity and Size of the array of numbers
     int modSize = 0; //Size of the array of modes 
-    int numbers[aSize]; //Array of numbers
+    int numbers[aCap]; //Array of numbers
+    bool error = false; //Flag for invalid input
     
     srand(time(0)); //Timer for true random
     
-    fillArray(numbers, aSize); //Fills the array with random numbers
+    //Prompt to input size of the Array 
+    
+    do{
+        if(error){ //If there is an invalid input
+            //Output invalid message
+            cout <<"Invalid input!" <<endl;
+        }
+        
+        //Prompt user for array size
+        cout <<"Enter the amount of numbers to generate(0-100): ";
+        cin >> aSize;
+        
+        //If the size does not fall within the range
+        if(aSize > 100 || aSize < 0){
+            //Flag invalid input
+            error = true;
+        }
+        else{
+            //Flag for valid input
+            error = false;
+        }
+    }while(error); //Continues as long as the input is invalid
+    
+    fillArray(numbers, aSize); //Fills the array with the indicated size
     
     int *mode = findMode(numbers, aSize, modSize); 
         //Assigns the pointer to mode
@@ -102,9 +126,10 @@ int *findMode(int array[], int aSize, int &modSize){
 }
 
 void fillArray(int array[], int size){
-    //Goes through the entire array
-    for (int i = 0; i < size; i++){
-        array[i] = rand()%11; //Assigns random numbers(0~10) to the array
+    //Goes through the filled portion of the array
+    for(int i = 0; i < size; i++){
+        //Generates numbers(0-4) for the user indicated size
+        array[i] = i%5;
     }
 }
 
