@@ -48,14 +48,14 @@ Player::Player(string name){
     
     pStr = 5; //Strength
     pDef = 5; //Defense
-    pAcc = 60; //Accuracy
+    pAcc = 70; //Accuracy
     pDex = 5; //Dexterity
     pInt = 5; //Intelligence
     pLuc = 5; //Luck
 }
 
 int Player::getHlth(){
-    return pHlth; //Returns health
+    return pHlth; //Returns current health
 }
 
 void Player::modHlth(int value){
@@ -63,11 +63,11 @@ void Player::modHlth(int value){
 }
 
 int Player::attck(){
-    //Generates a random number from 0 - 100
+    //Generates a random number from 0 - 100 for crit %
     unsigned short int crit = rand()%101;
     //Sets the initial damage of the player by 70% of the strength
     unsigned short int dmg = pStr*0.7;
-    //Generates a random number for hit/miss
+    //Generates a random number for hit/miss %
     unsigned short int hit = rand()%101;
     
     //Checks if crit generated a number less than luck (luck% chance)
@@ -96,7 +96,7 @@ int Player::dmged(int eAtt){
     }
     
     //Checks the dodge value for dodge chance
-    if(dodge < pDex){
+    if(dodge < pDex * 0.7){
         //Sets damage to 0
         dmg = 0;
     }
@@ -106,4 +106,28 @@ int Player::dmged(int eAtt){
     
     //Return the amount of damage recieved
     return dmg;
+}
+
+void Player::modStat(int str, int def, int acc, int dex, int intl, int luc){
+    pStr += str; // Modifies strength
+    pDef += def; // Defense
+    pAcc += acc; // Accuracy
+    pDex += dex; // Dexterity
+    pInt += intl; // Intelligence
+    pLuc += luc; //Luck
+}
+
+void Player::seeStat(){
+    cout <<"--------------------------------" <<endl
+            <<"============ Stats =============" <<endl
+            <<"--------------------------------" <<endl
+            <<"Str: " <<pStr <<endl
+            <<"Def: " <<pDef <<endl
+            <<"Acc: " <<pAcc <<endl
+            <<"Dex: " <<pDex <<endl
+            <<"Int: " <<pInt <<endl
+            <<"Luc: " <<pLuc <<endl
+            <<"--------------------------------" <<endl
+            <<"================================" <<endl;
+    
 }

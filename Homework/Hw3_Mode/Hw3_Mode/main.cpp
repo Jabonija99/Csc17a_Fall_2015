@@ -11,11 +11,12 @@
 
 using namespace std;
 
-int *findMode(int array[], int aSize, int &modSize);
+int *findMode(int array[], int aSize, int &modSize, int &mxMode);
 /*** Finds the mode(s) of an array then inputs it into a dynamic array
  * @param array - an array of random numbers
  * @param aSize - the size of the array
  * @param modSize - size of the mode array
+ * @param mxMode - Maximum mode frequency
  * returns the pointer of mode(s)*/
 void fillArray(int[], int); //Fills the array with values (0-4)
 void outArray(int *, int); //Outputs the array
@@ -26,7 +27,7 @@ void outArray(int *, int); //Outputs the array
 
 int main(int argc, char** argv) {
     int aCap = 100, aSize = 0; //Capacity and Size of the array of numbers
-    int modSize = 0; //Size of the array of modes 
+    int mSize = 0, maxMode = 1; //Size of the array of modes and max mode freq. 
     int numbers[aCap]; //Array of numbers
     bool error = false; //Flag for invalid input
     
@@ -55,7 +56,7 @@ int main(int argc, char** argv) {
     
     fillArray(numbers, aSize); //Fills the array with the indicated size
     
-    int *mode = findMode(numbers, aSize, modSize); 
+    int *mode = findMode(numbers, aSize, mSize, maxMode); 
         //Assigns the pointer to mode
    
     //Output the array and it's values
@@ -64,13 +65,14 @@ int main(int argc, char** argv) {
    
     cout <<"Mode: ";
     //If there is no mode
-    if(modSize == 0){
+    if(mSize == 0){
         //Output 'no mode' message
         cout <<"No mode found!" <<endl;
     }
     else{
         //Output mode and its values
-        outArray(mode, modSize);
+        outArray(mode, mSize);
+        cout <<"Frequency: " <<maxMode <<endl; 
     }
     //Delete the new pointer
     delete []mode;
@@ -78,18 +80,18 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-int *findMode(int array[], int aSize, int &modSize){
+int *findMode(int array[], int aSize, int &modSize, int &mxMode){
     int cap = 10; //Capacity for the mode array
     int *mode = new int[cap]; //Pointer for mode
     bool dup = false; //Flag for duplicates
-    int maxMode = 1, k = 0; //Maximum count for mode and the counter
+    int k = 0; //Counter for mode
    
     //Searches the array
     for(int i = 0; i < aSize; i++){
         //Search the array again to compare values
         for(int j = 0; j < aSize; j++){ 
             //If the values match and are not of the same address
-            if(array[i] == array [j] && i != j){
+            if(array[i] == array [j]){
                 //Increment the counter
                 k++;
             }
@@ -105,14 +107,14 @@ int *findMode(int array[], int aSize, int &modSize){
         }
         
         //If it is not a duplicate and the number count is > the maximum mode
-        if(!dup && k > maxMode){
-            maxMode = k; //Set the maximum mode to the current count
+        if(!dup && k > mxMode){
+            mxMode = k; //Set the maximum mode to the current count
             modSize = 0; //Reset the size, "deleting" any current numbers
             mode[modSize] = array[i]; //Assigns the value into the mode array
             modSize++; //Increment the size
         }
         //If the count is the same as the maximum Mode
-        else if(!dup && k == maxMode){
+        else if(!dup && k == mxMode && k != 1){
             mode[modSize] = array[i]; //Add the number into the mode array
             modSize++; //Increment the size
         }
