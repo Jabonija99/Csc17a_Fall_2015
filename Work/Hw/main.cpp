@@ -14,7 +14,8 @@ class Player{
 public:
     Player(string); //Base constructor
     
-    int getHlth();//Returns player's health
+    int getCHlth();//Returns player's current health
+    int getMxHlth();//Returns player's max health
     void modHlth(int);//Modifies player's max health
     
     int attck(); //Sets the damage
@@ -35,12 +36,12 @@ private:
  * 
  */
 int main(int argc, char** argv) {
-
+    
     return 0;
 }
 
 Player::Player(string name){
-    pName = name; //Luck
+    pName = name; //Player Name
     
     pMxHlth = 10; //Max Health
     pHlth = 10; //Current Health
@@ -54,8 +55,12 @@ Player::Player(string name){
     pLuc = 5; //Luck
 }
 
-int Player::getHlth(){
+int Player::getCHlth(){
     return pHlth; //Returns current health
+}
+
+int Player::getMxHlth(){
+    return pMxHlth;
 }
 
 void Player::modHlth(int value){
@@ -118,16 +123,44 @@ void Player::modStat(int str, int def, int acc, int dex, int intl, int luc){
 }
 
 void Player::seeStat(){
-    cout <<"--------------------------------" <<endl
-            <<"============ Stats =============" <<endl
-            <<"--------------------------------" <<endl
-            <<"Str: " <<pStr <<endl
-            <<"Def: " <<pDef <<endl
-            <<"Acc: " <<pAcc <<endl
-            <<"Dex: " <<pDex <<endl
-            <<"Int: " <<pInt <<endl
-            <<"Luc: " <<pLuc <<endl
-            <<"--------------------------------" <<endl
-            <<"================================" <<endl;
-    
+    int quit = 0;
+    do{
+        cout <<"--------------------------------" <<endl
+                <<"============ Stats =============" <<endl
+                <<"--------------------------------" <<endl
+                <<"Name: " <<pName <<endl
+                <<"Str: " <<pStr <<endl
+                <<"Def: " <<pDef <<endl
+                <<"Acc: " <<pAcc <<endl
+                <<"Dex: " <<pDex <<endl
+                <<"Int: " <<pInt <<endl
+                <<"Luc: " <<pLuc <<endl
+                <<"--------------------------------" <<endl
+                <<"================================" <<endl;
+        cout <<"Enter -1 to quit: ";
+        cin >> quit;
+    }while(quit != -1);
+}
+
+int Player::getStat(int stat){
+    switch(stat){
+        case 1:
+            return pStr;
+            break;
+        case 2:
+            return pDef;
+            break;
+        case 3:
+            return pAcc;
+            break;
+        case 4:
+            return pDex;
+            break;
+        case 5:
+            return pInt;
+            break;
+        case 6:
+            return pLuc;
+            break;
+    }
 }
