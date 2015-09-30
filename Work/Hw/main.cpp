@@ -25,17 +25,31 @@ public:
     void seeStat(); //Displays stats
     int getStat(int stat); //Returns the indicated stat
     
+    bool setExp(int exp);
+    void lvlUp();
+    
 private:
     string pName; //Player name
-    int pMxHlth, pHlth, pStmna; //Player max/current health and stamina
+    int pMxHlth, pCHlth, pStmna; //Player max/current health and stamina
     int pStr, pDef, pAcc; //Combat stats
     int pDex, pInt, pLuc; //Social stats
-    
+    int pCExp, pMxExp; //Current and max experience level
 };
+
 /*
  * 
  */
+
+void cls(); //Pseudo cls
+
 int main(int argc, char** argv) {
+    Player hero("Jay");
+
+    if(hero.setExp(120)){
+        hero.lvlUp();
+    }
+    
+    hero.seeStat();
     
     return 0;
 }
@@ -44,7 +58,7 @@ Player::Player(string name){
     pName = name; //Player Name
     
     pMxHlth = 10; //Max Health
-    pHlth = 10; //Current Health
+    pCHlth = 10; //Current Health
     pStmna = 10; //Stamina
     
     pStr = 5; //Strength
@@ -53,10 +67,13 @@ Player::Player(string name){
     pDex = 5; //Dexterity
     pInt = 5; //Intelligence
     pLuc = 5; //Luck
+    
+    pCExp = 0; //Current Experience
+    pMxExp = 100; //Max Experience to level
 }
 
 int Player::getCHlth(){
-    return pHlth; //Returns current health
+    return pCHlth; //Returns current health
 }
 
 int Player::getMxHlth(){
@@ -107,7 +124,7 @@ int Player::dmged(int eAtt){
     }
     
     //Apply damage to health
-    pHlth -= dmg;
+    pCHlth -= dmg;
     
     //Return the amount of damage recieved
     return dmg;
@@ -127,8 +144,10 @@ void Player::seeStat(){
     do{
         cout <<"--------------------------------" <<endl
                 <<"============ Stats =============" <<endl
+                <<"Name: " <<pName <<endl 
+                <<"Hp: " <<pCHlth <<"/" <<pMxHlth
+                <<"   Exp: " <<pCExp <<"/" <<pMxExp <<endl
                 <<"--------------------------------" <<endl
-                <<"Name: " <<pName <<endl
                 <<"Str: " <<pStr <<endl
                 <<"Def: " <<pDef <<endl
                 <<"Acc: " <<pAcc <<endl
@@ -140,6 +159,7 @@ void Player::seeStat(){
         cout <<"Enter -1 to quit: ";
         cin >> quit;
     }while(quit != -1);
+    cls();
 }
 
 int Player::getStat(int stat){
@@ -162,5 +182,109 @@ int Player::getStat(int stat){
         case 6:
             return pLuc;
             break;
+    }
+}
+
+bool Player::setExp(int exp){
+    pCExp += exp; //Sets experience to current exp level
+    
+    if(pCExp > pMxExp){ //If the current exp exceeds the max exp
+        pCExp -= pMxExp; //Assigns excess exp to current level
+        return true; //Level up is true
+    }
+    
+    return false; //Level up is false
+}
+
+void Player::lvlUp(){
+    int pts = 5, pIn; //Points to distribute and player input
+    int str = 0, def = 0, acc = 0, dex = 0, intl = 0, luc = 0; //Stat pts
+   
+    string quit; //String for confirming quit
+    
+    do{
+        //Displays level up screen
+        cout <<"Level up!" <<endl
+                <<"Distribute your stats! Points: " <<pts <<endl
+                <<"---------------------------------------" <<endl
+                <<"[1] Str: " <<pStr <<" + (" <<str <<")" <<endl
+                <<"[2] Def: " <<pDef <<" + (" <<def <<")" <<endl
+                <<"[3] Acc: " <<pAcc <<" + (" <<acc <<")" <<endl
+                <<"[4] Dex: " <<pDex <<" + (" <<dex <<")" <<endl
+                <<"[5] Int: " <<pInt <<" + (" <<intl <<")" <<endl
+                <<"[6] Luc: " <<pLuc <<" + (" <<luc <<")" <<endl
+                <<"---------------------------------------" <<endl;
+        
+        
+        if(pts > 0){ //If the user still has points to distribute
+            //User selects a stat to raise
+            cout <<"Select a stat: "; 
+            cin >> pIn;
+            
+            //Distributes the point
+            switch(pIn){
+                case 1: //Strength
+                    str++;
+                    pts--;
+                    break;
+                    
+                case 2: //Defense
+                    def++;
+                    pts--;
+                    break;
+                    
+                case 3: //Accuracy
+                    acc++;
+                    pts--;
+                    break;
+                    
+                case 4: //Dexterity
+                    dex++;
+                    pts--;
+                    break;
+                    
+                case 5: //Intelligence
+                    intl++;
+                    pts--;
+                    break;
+                    
+                case 6: //Luck
+                    luc++;
+                    pts--;
+                    break;
+            }
+        }
+        else{ //Else if the user is out of points
+            //Prompt to confirm selection
+            cout <<"Confirm (Y/N)? ";
+            cin >> quit;
+            
+            //If the user does not select to quit
+            if(tolower(quit[0]) != 'y'){
+                //Reset stats
+                str = 0;
+                def = 0;
+                acc = 0;
+                dex = 0;
+                intl = 0;
+                luc = 0;
+                
+                //Reset points
+                pts = 5;
+            }
+            else{ //If the user does select to quit
+                //Modify the stats by the selected values
+                modStat(str,def,acc,dex,intl,luc);
+            }
+        }
+                
+        cls();
+    }while(tolower(quit[0]) != 'y');
+}
+
+
+void cls(){
+    for(int i = 0; i < 10; i++){
+        cout <<endl;
     }
 }
