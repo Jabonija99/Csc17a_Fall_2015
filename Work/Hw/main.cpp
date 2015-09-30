@@ -7,6 +7,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -25,15 +26,15 @@ public:
     void seeStat(); //Displays stats
     int getStat(int stat); //Returns the indicated stat
     
-    bool setExp(int exp);
-    void lvlUp();
+    bool setExp(int exp); //Calculates added exp
+    void lvlUp(); //Level up 
     
 private:
     string pName; //Player name
     int pMxHlth, pCHlth, pStmna; //Player max/current health and stamina
     int pStr, pDef, pAcc; //Combat stats
     int pDex, pInt, pLuc; //Social stats
-    int pCExp, pMxExp; //Current and max experience level
+    int pCExp, pMxExp, pLvl; //Current/max experience and level
 };
 
 /*
@@ -70,6 +71,7 @@ Player::Player(string name){
     
     pCExp = 0; //Current Experience
     pMxExp = 100; //Max Experience to level
+    pLvl = 1; //Current level
 }
 
 int Player::getCHlth(){
@@ -77,7 +79,7 @@ int Player::getCHlth(){
 }
 
 int Player::getMxHlth(){
-    return pMxHlth;
+    return pMxHlth; //Returns the max health
 }
 
 void Player::modHlth(int value){
@@ -144,9 +146,9 @@ void Player::seeStat(){
     do{
         cout <<"--------------------------------" <<endl
                 <<"============ Stats =============" <<endl
-                <<"Name: " <<pName <<endl 
+                <<"Name: " <<pName <<setw(10) <<"Lvl: " <<pLvl <<endl
                 <<"Hp: " <<pCHlth <<"/" <<pMxHlth
-                <<"   Exp: " <<pCExp <<"/" <<pMxExp <<endl
+                <<setw(10) <<"Exp: " <<pCExp <<"/" <<pMxExp <<endl
                 <<"--------------------------------" <<endl
                 <<"Str: " <<pStr <<endl
                 <<"Def: " <<pDef <<endl
@@ -201,6 +203,8 @@ void Player::lvlUp(){
     int str = 0, def = 0, acc = 0, dex = 0, intl = 0, luc = 0; //Stat pts
    
     string quit; //String for confirming quit
+    
+    pLvl++; //Increment lvl up
     
     do{
         //Displays level up screen
