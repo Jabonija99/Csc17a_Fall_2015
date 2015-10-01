@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin_4.x-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin_4.x-Windows
-CND_ARTIFACT_NAME_Debug=hw
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/hw
+CND_ARTIFACT_NAME_Debug=fun
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/fun
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin_4.x-Windows/package
-CND_PACKAGE_NAME_Debug=hw.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/package/hw.tar
+CND_PACKAGE_NAME_Debug=fun.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin_4.x-Windows/package/fun.tar
 # Release configuration
 CND_PLATFORM_Release=Cygwin_4.x-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/Cygwin_4.x-Windows
-CND_ARTIFACT_NAME_Release=hw
-CND_ARTIFACT_PATH_Release=dist/Release/Cygwin_4.x-Windows/hw
+CND_ARTIFACT_NAME_Release=fun
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin_4.x-Windows/fun
 CND_PACKAGE_DIR_Release=dist/Release/Cygwin_4.x-Windows/package
-CND_PACKAGE_NAME_Release=hw.tar
-CND_PACKAGE_PATH_Release=dist/Release/Cygwin_4.x-Windows/package/hw.tar
+CND_PACKAGE_NAME_Release=fun.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin_4.x-Windows/package/fun.tar
 #
 # include compiler specific variables
 #

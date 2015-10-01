@@ -28,6 +28,7 @@ public:
     
     bool setExp(int exp); //Calculates added exp
     void lvlUp(); //Level up 
+    int getLvl(); //Returns level
     
 private:
     string pName; //Player name
@@ -35,6 +36,24 @@ private:
     int pStr, pDef, pAcc; //Combat stats
     int pDex, pInt, pLuc; //Social stats
     int pCExp, pMxExp, pLvl; //Current/max experience and level
+};
+
+class Enemy{
+public:
+    //Base constructor
+    Enemy(string name, int, int, int, int ,int ,int, int, int, int); 
+    
+    int getCHlth(); //Returns current health
+    
+    int attck(); //Sets damage
+    int dmged(int pAtt); //Calculates and returns damage
+    
+    
+private:
+    string eName;
+    int eMxHlth, eCHlth, eStmna;
+    int eStr, eDef, eAcc;
+    int eDex, eInt, eLuc;
 };
 
 /*
@@ -73,19 +92,15 @@ Player::Player(string name){
     pMxExp = 100; //Max Experience to level
     pLvl = 1; //Current level
 }
-
 int Player::getCHlth(){
     return pCHlth; //Returns current health
 }
-
 int Player::getMxHlth(){
     return pMxHlth; //Returns the max health
 }
-
 void Player::modHlth(int value){
     pMxHlth += value; //Sets max health
 }
-
 int Player::attck(){
     //Generates a random number from 0 - 100 for crit %
     unsigned short int crit = rand()%101;
@@ -108,7 +123,6 @@ int Player::attck(){
     //Returns the damage
     return dmg;
 }
-
 int Player::dmged(int eAtt){
     int dodge = rand()%101; //Calculates a number for dodge chance
     int dmg = eAtt - pDef; //Calculates damage
@@ -131,7 +145,6 @@ int Player::dmged(int eAtt){
     //Return the amount of damage recieved
     return dmg;
 }
-
 void Player::modStat(int str, int def, int acc, int dex, int intl, int luc){
     pStr += str; // Modifies strength
     pDef += def; // Defense
@@ -140,7 +153,6 @@ void Player::modStat(int str, int def, int acc, int dex, int intl, int luc){
     pInt += intl; // Intelligence
     pLuc += luc; //Luck
 }
-
 void Player::seeStat(){
     int quit = 0;
     do{
@@ -163,7 +175,6 @@ void Player::seeStat(){
     }while(quit != -1);
     cls();
 }
-
 int Player::getStat(int stat){
     switch(stat){
         case 1:
@@ -186,7 +197,6 @@ int Player::getStat(int stat){
             break;
     }
 }
-
 bool Player::setExp(int exp){
     pCExp += exp; //Sets experience to current exp level
     
@@ -197,7 +207,6 @@ bool Player::setExp(int exp){
     
     return false; //Level up is false
 }
-
 void Player::lvlUp(){
     int pts = 5, pIn; //Points to distribute and player input
     int str = 0, def = 0, acc = 0, dex = 0, intl = 0, luc = 0; //Stat pts
@@ -285,7 +294,72 @@ void Player::lvlUp(){
         cls();
     }while(tolower(quit[0]) != 'y');
 }
+int Player::getLvl(){
+    return pLvl; //Returns the player's level
+}
 
+Enemy::Enemy(string name, int mxHlth, int stmna,  int str, int 
+def, int acc, int dex, int intl, int luc){
+    eName = name;
+    
+    eMxHlth = mxHlth;
+    eCHlth = eMxHlth;
+    eStmna = stmna;
+    
+    eStr = str;
+    eDef = def;
+    eAcc = acc;
+    eDex = dex;
+    eInt = intl;
+    eLuc = luc;
+}
+int Enemy::getCHlth(){
+    return eCHlth;
+} 
+int Enemy::attck(){
+//Generates a random number from 0 - 100 for crit %
+    unsigned short int crit = rand()%101;
+    //Sets the initial damage of the player by 70% of the strength
+    unsigned short int dmg = eStr*0.6;
+    //Generates a random number for hit/miss %
+    unsigned short int hit = rand()%101;
+    
+    //Checks if crit generated a number less than luck (luck% chance)
+    if(crit < eLuc){
+        //Doubles damage if crit
+        dmg = dmg*2;
+    }
+    //Checks if player misses 
+    if(hit > eAcc){
+        //Sets the damage to 0 if miss
+        dmg = 0;
+    }
+    
+    //Returns the damage
+    return dmg;
+} 
+int Enemy::dmged(int pAtt){
+    int dodge = rand()%101; //Calculates a number for dodge chance
+    int dmg = pAtt - eDef; //Calculates damage
+    
+    //If the damage is less than 0
+    if(dmg < 0){
+        //Set damage to 0
+        dmg = 0;
+    }
+    
+    //Checks the dodge value for dodge chance
+    if(dodge < eDex * 0.7){
+        //Sets damage to 0
+        dmg = 0;
+    }
+    
+    //Apply damage to health
+    eCHlth -= dmg;
+    
+    //Return the amount of damage recieved
+    return dmg;
+}
 
 void cls(){
     for(int i = 0; i < 10; i++){
