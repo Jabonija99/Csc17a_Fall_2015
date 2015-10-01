@@ -15,6 +15,8 @@ class Player{
 public:
     Player(string); //Base constructor
     
+    string name();//Return's player name
+    
     int getCHlth();//Returns player's current health
     int getMxHlth();//Returns player's max health
     void modHlth(int);//Modifies player's max health
@@ -64,6 +66,7 @@ void cls(); //Pseudo cls
 
 int main(int argc, char** argv) {
     Player hero("Jay");
+    Enemy slime("slime", 1,1,1,1,1,1,1,1);
 
     if(hero.setExp(120)){
         hero.lvlUp();
@@ -91,6 +94,9 @@ Player::Player(string name){
     pCExp = 0; //Current Experience
     pMxExp = 100; //Max Experience to level
     pLvl = 1; //Current level
+}
+string Player::name(){
+    return pName;
 }
 int Player::getCHlth(){
     return pCHlth; //Returns current health
