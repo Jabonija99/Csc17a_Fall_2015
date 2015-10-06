@@ -43,7 +43,7 @@ private:
 class Enemy{
 public:
     //Base constructor
-    Enemy(string name, int, int, int, int ,int ,int, int, int, int); 
+    Enemy(string name, int, int, int, int ,int ,int, int, int);
     
     int getCHlth(); //Returns current health
     
@@ -65,12 +65,16 @@ private:
 void cls(); //Pseudo cls
 
 int main(int argc, char** argv) {
+    srand(time(0));
+    
     Player hero("Jay");
-    Enemy slime("slime", 1,1,1,1,1,1,1,1);
+    Enemy slime("slime", 1,1,20,1,1,1,1,1);
 
-    if(hero.setExp(120)){
-        hero.lvlUp();
-    }
+    cout << "Slime receives "<<slime.dmged(hero.attck()) <<" damage!" <<endl;
+    cout << hero.name() <<" receives " <<hero.dmged(slime.attck()) <<" damage!"
+            <<endl;
+    cout <<hero.name() <<" gains 120 exp!" <<endl;
+    
     
     hero.seeStat();
     
