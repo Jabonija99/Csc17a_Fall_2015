@@ -1,0 +1,9 @@
+RPG Game -
+	Utilizes:
+		Classes for player
+		Read and writing to file
+			Uses save points as checkpoints for where the player is at in the game.
+		Pointer arrays for inventory
+		structures for items
+
+
