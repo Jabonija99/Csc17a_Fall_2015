@@ -14,7 +14,7 @@
 //Global constants
 
 //User objects
-class pDate{
+class Date{
 private:
     //Integer for month, day, and year
     int dMnth, dDay, dYear;
@@ -42,7 +42,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     //Date variable for current date
-    pDate cDate;
+    Date cDate;
     //Integers for month day and year
     int mnth,day,yr;
     //Flag for input Validation
@@ -88,19 +88,23 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void pDate::setDay(int day){
+Date::Date(){
+
+}
+
+void Date::setDay(int day){
     dDay = day;
 }
-void pDate::setMnth(int mnth){
+void Date::setMnth(int mnth){
     dMnth = mnth;
 }
-void pDate::setYear(int yr){
+void Date::setYear(int yr){
     dYear = yr;
 }
-void pDate::outNDate(){
+void Date::outNDate(){
     cout <<dMnth <<"/" <<dDay <<"/" <<dYear <<endl;
 }
-void pDate::outWDate(){
+void Date::outWDate(){
     switch(dMnth){
         case 1:
             cout <<"January "<<dDay <<", " <<dYear <<endl;
@@ -141,7 +145,7 @@ void pDate::outWDate(){
     }
 }
 
-void pDate::outEDate(){
+void Date::outEDate(){
     switch(dMnth){
         case 1:
             cout <<dDay <<" January "<<dYear <<endl;

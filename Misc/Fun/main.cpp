@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
     cout << "Slime receives "<<slime.dmged(hero.attck()) <<" damage!" <<endl;
     cout << hero.name() <<" receives " <<hero.dmged(slime.attck()) <<" damage!"
             <<endl;
-    cout <<hero.name() <<" gains 120 exp!" <<endl;
+    cout <<hero.name() <<" gains 120   exp!" <<endl;
     
     
     
