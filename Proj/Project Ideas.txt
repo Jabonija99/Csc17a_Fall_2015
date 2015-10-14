@@ -1,8 +1,12 @@
 RPG Game -
 	Utilizes:
 		Classes for player
+		Game class?
+			checkpoints, complete%
+		Class for each chapter of the story
 		Read and writing to file
-			Uses save points as checkpoints for where the player is at in the game.
+			Uses integers as checkpoints for saves in the game
+			Uses a completetion % to note where the player is at in the story
 		Pointer arrays for inventory
 		structures for items
 
