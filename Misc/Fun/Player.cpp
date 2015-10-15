@@ -13,6 +13,24 @@
 
 using namespace std;
 
+Player::Player(){
+    pName = "Hero"; //Player Name
+    
+    pMxHlth = 10; //Max Health
+    pCHlth = 10; //Current Health
+    pStmna = 10; //Stamina
+    
+    pStr = 5; //Strength
+    pDef = 5; //Defense
+    pAcc = 70; //Accuracy
+    pDex = 5; //Dexterity
+    pInt = 5; //Intelligence
+    pLuc = 5; //Luck
+    
+    pCExp = 0; //Current Experience
+    pMxExp = 100; //Max Experience to level
+    pLvl = 1; //Current level
+}
 Player::Player(string name){
     pName = name; //Player Name
     
@@ -34,6 +52,10 @@ Player::Player(string name){
 string Player::name(){
     return pName;
 }
+void Player::setName(string name){
+    pName = name;
+}
+
 int Player::getCHlth(){
     return pCHlth; //Returns current health
 }
@@ -43,6 +65,7 @@ int Player::getMxHlth(){
 void Player::modHlth(int value){
     pMxHlth += value; //Sets max health
 }
+
 int Player::attck(){
     //Generates a random number from 0 - 100 for crit %
     unsigned short int crit = rand()%101;
@@ -87,6 +110,7 @@ int Player::dmged(int eAtt){
     //Return the amount of damage recieved
     return dmg;
 }
+
 void Player::modStat(int str, int def, int acc, int dex, int intl, int luc){
     pStr += str; // Modifies strength
     pDef += def; // Defense
@@ -121,25 +145,85 @@ int Player::getStat(int stat){
     //Returns the given stat
     switch(stat){
         case 1:
-            return pStr;
+            return pMxHlth;
             break;
         case 2:
-            return pDef;
+            return pCHlth;
             break;
         case 3:
-            return pAcc;
+            return pStmna;
             break;
         case 4:
-            return pDex;
+            return pStr;
             break;
         case 5:
-            return pInt;
+            return pDef;
             break;
         case 6:
+            return pAcc;
+            break;
+        case 7:
+            return pDex;
+            break;
+        case 8:
+            return pInt;
+            break;
+        case 9:
             return pLuc;
+            break;
+        case 10:
+            return pMxExp;
+            break;
+        case 11:
+            return pCExp;
+            break;
+        case 12:
+            return pLvl;
             break;
     }
 }
+void Player::setStat(int stat, int value){
+    //Set the indicated stat with the given value
+    switch(stat){
+        case 1:
+            pMxHlth = value;
+            break;
+        case 2:
+            pCHlth = value;
+            break;
+        case 3:
+            pStmna = value;
+            break;
+        case 4:
+            pStr = value;
+            break;
+        case 5:
+            pDef = value;
+            break;
+        case 6:
+            pAcc = value;
+            break;
+        case 7:
+           pDex = value;
+            break;
+        case 8:
+            pInt = value;
+            break;
+        case 9:
+            pLuc = value;
+            break;
+        case 10:
+            pMxExp = value;
+            break;
+        case 11:
+            pCExp = value;
+            break;
+        case 12:
+            pLvl = value;
+            break;
+    }
+}
+
 bool Player::setExp(int exp){
     pCExp += exp; //Sets experience to current exp level
     
@@ -240,6 +324,7 @@ void Player::lvlUp(){
 int Player::getLvl(){
     return pLvl; //Returns the player's level
 }
+
 
 void Player::cls(){
     for(int i = 0; i < 10; i++){

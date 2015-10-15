@@ -13,24 +13,29 @@ using namespace std;
 
 class Player{
 public:
-    Player(string); //Base constructor
+    Player(); //Base constructor
+    Player(string); //Constructor for new game
     
     string name();//Return's player name
+    void setName(string); //set player name
     
     int getCHlth();//Returns player's current health
     int getMxHlth();//Returns player's max health
     void modHlth(int);//Modifies player's max health
     
     int attck(); //Sets the damage
-    int dmged(int eAtt); //Calculates incoming damage 
+    int dmged(int); //Calculates incoming damage 
     
     void modStat(int, int, int, int, int, int); //Modifies stats
     void seeStat(); //Displays stats
-    int getStat(int stat); //Returns the indicated stat
+    int getStat(int); //Returns the indicated stat
+    void setStat(int, int); //Set the indicated stat
     
-    bool setExp(int exp); //Calculates added exp
+    bool setExp(int); //Calculates added exp
     void lvlUp(); //Level up 
     int getLvl(); //Returns level
+    
+    
     
 private:
     void cls();
