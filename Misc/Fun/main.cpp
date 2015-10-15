@@ -18,6 +18,36 @@
 
 using namespace std;
 
+class Area{
+private:
+    //Name of the area and description
+    string aName, aDesc;
+    //Type of terrain
+    int aTerrn;
+public:
+    //Constructors
+    Area();
+    Area(string, string, int);
+    
+    //Set name of the area
+    void setName(string);
+    //Set description of the area
+    void setDesc(string);
+    //Set terrain type
+    void setTerr(int);
+    
+    //Returns the name of the area
+    string name(); 
+    //Returns the description of the area
+    string desc();
+    //Returns the type of terrain
+    int terrn();
+    //Output the type of terrain
+    void outTer();
+    
+    
+};
+
 /*
  * 
  */
@@ -26,31 +56,13 @@ void loadGme();
 void cls(); //Pseudo cls
 
 int main(int argc, char** argv) {
+    /*
     srand(time(0));
     //User input
     int userIn;
     //Flag for exit
     bool quit = false;
-    
-    /*
-    string name;
-    
-    Player hero1("Jay");
-    Player hero2("Stalin");
-    Enemy slime("slime", 1,1,10,1,70,1,1,1);
-    
-    
-    cout << "Slime receives "<<slime.dmged(hero1.attck()) <<" damage!" <<endl;
-    cout << hero1.name() <<" receives " <<hero1.dmged(slime.attck()) <<" damage!"
-            <<endl;
-    Game one(hero1);
-    hero1.modStat(12,34,56,78,90,12);
-    cin >> name;
-    one.save(hero1);
-    one.load(hero2, name);
-    hero2.seeStat();
-    */
-    
+  
     do{
         cout <<"======================" <<endl
                 <<"       RPG Game" <<endl
@@ -78,18 +90,66 @@ int main(int argc, char** argv) {
                 cout <<"Invalid input!" <<endl;
                 break;
         }
-        cls();
+        
     }while(!quit);
-    
+    */
     
     return 0;
 }
+
+Area::Area(){
+    aName = "New Area";
+    aDesc = " ";
+    aTerrn = 0;
+}
+Area::Area(string name, string desc, int terr){
+    aName = name;
+    aDesc = desc;
+    aTerrn = terr;
+}
+void Area::setName(string name){
+    aName = name;
+}
+void Area::setDesc(string desc){
+    aDesc = desc;
+}
+void Area::setTerr(int val){
+    aTerrn = val;
+}
+string Area::name(){
+    return aName;
+}
+string Area::desc(){
+    return aDesc;
+}
+int Area::terrn(){
+    return aTerrn;
+}
+void Area::outTer(){
+    switch(aTerrn){
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+    }
+}
+
 
 void newGme(){
     string name, ans;
     do{
         cls();
-        cout << "Welcome to my rpg game!" <<endl
+         cout <<"----------------------" <<endl
+            <<"       New Game" <<endl
+            <<"----------------------" <<endl
             <<"Enter your name: ";
         cin >> name;
     
@@ -104,10 +164,6 @@ void newGme(){
     if(!rpg.save(hero)){
         cout <<"Error: Failed to create save file!" <<endl;
     }
-    
-    
-    
-    
 }
 void loadGme(){
     cls();
@@ -127,7 +183,7 @@ void loadGme(){
         cout <<"Load successful"<<endl;
         
         
-    } 
+    }
 }
 
 void cls(){
