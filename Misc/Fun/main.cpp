@@ -29,9 +29,9 @@ void loadGme();
 //Basic level menu
 void level(Player&, Game&, bool&);
 //Arena function
-void arena(Player&,const Game&, bool&);
+void arena(Player&,Game&, bool&);
 //Battle interface
-void bttlUi(Player&, bool&);
+void bttlUi(Player&,Enemy&, bool&);
 //Chapter one story
 void chp1(Player&, Game&);
 //Pseudo cls
@@ -172,7 +172,7 @@ void level(Player&hero, Game&rpg, bool&lvComp){
                     <<"----------------------" <<endl
                     <<"1] Bed(Save)" <<endl
                     <<"2] Shop" <<endl
-                    <<"3] Arena" <<endl
+                    <<"3] Arena (Fight)" <<endl
                     <<"4] Main Menu" <<endl
                     <<"----------------------" <<endl
                     <<"Enter choice: ";
@@ -193,7 +193,7 @@ void level(Player&hero, Game&rpg, bool&lvComp){
                 
                 break;
             case 3:
-
+                arena(hero, rpg, lvComp);
                 cont = true;
                 break;
             case 4:
@@ -210,19 +210,44 @@ void level(Player&hero, Game&rpg, bool&lvComp){
     
 }
 
-void arena(Player &hero,const Game &rpg, bool &lvComp){
+void arena(Player &hero,Game &rpg, bool &lvComp){
     switch(rpg.getChckpt()){
-        case 1:
+        case 0:
+            //Dialogue
             cout <<"Fight 1" <<endl;
+            
+            //Create enemy
+            Enemy foe("Demon", 10, 50, 10, 3, 80, 10, 10, 10);
+            bttlUi(hero, foe, lvComp);
+            
             
             
             break;
     }
 }
 
+void bttlUi(Player &hero,Enemy &foe, bool &lvComp){
+    
+    do{
+        cout <<"==========================================" <<endl <<endl
+            <<"==========================================" <<endl
+            <<"------------------------------------------" <<endl
+            <<left <<setw(30) <<hero.name() 
+            <<right <<setw(30) <<foe.name() <<endl
+            <<left <<"HP: " <<hero.getCHlth() <<"/" <<hero.getMxHlth() 
+            <<right <<endl;
+    
+    }while(!hero.dead() && !foe.dead());
+    
+            
+}
+
 void chp1(Player&hero, Game&rpg){
     //Flag for level completion
     bool lvComp = false;
+    
+    //Dialogue
+    
     //Load level
     level(hero, rpg, lvComp);
     
@@ -240,6 +265,9 @@ void chp1(Player&hero, Game&rpg){
         return;
     }
     else{
+        //Dialogue
+        
+        
         //Increment percentage completed
         rpg.modCmplte(10);
         //Set checkpoint to chapter 2

@@ -25,6 +25,11 @@ def, int acc, int dex, int intl, int luc){
     eDex = dex;
     eInt = intl;
     eLuc = luc;
+    
+    eDead = false;
+}
+string Enemy::name(){
+    return eName;
 }
 int Enemy::getMxHlth(){
     return eMxHlth;
@@ -76,14 +81,8 @@ int Enemy::dmged(int pAtt){
     //Return the amount of damage recieved
     return dmg;
 }
-bool Enemy::alive(){
-    bool lives = true;
-    
-    if(eCHlth < 1){
-        lives = false;
-    }
-    
-    return lives;
+bool Enemy::dead(){
+    return eDead;
 }
 int Enemy::choice(){
     //Enemy's chosen input
