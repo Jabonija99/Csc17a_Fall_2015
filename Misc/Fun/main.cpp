@@ -229,13 +229,18 @@ void arena(Player &hero,Game &rpg, bool &lvComp){
 void bttlUi(Player &hero,Enemy &foe, bool &lvComp){
     
     do{
-        cout <<"==========================================" <<endl <<endl
-            <<"==========================================" <<endl
-            <<"------------------------------------------" <<endl
-            <<left <<setw(30) <<hero.name() 
-            <<right <<setw(30) <<foe.name() <<endl
-            <<left <<"HP: " <<hero.getCHlth() <<"/" <<hero.getMxHlth() 
-            <<right <<endl;
+        cout <<"===================================" 
+                <<"===================================" <<endl
+                <<"-----------------------------------"
+                <<"-----------------------------------" <<endl
+                <<left <<hero.name() 
+                <<right <<setw(52) 
+                <<foe.name() <<endl
+                <<left <<"HP: " <<hero.getCHlth() <<"/" <<hero.getMxHlth() 
+                <<right <<setw(40) 
+                <<foe.getCHlth() <<"/" <<foe.getMxHlth() <<":HP"<<endl;
+                <<left <<"Stamina: ";
+        delay(399999999);
     
     }while(!hero.dead() && !foe.dead());
     
