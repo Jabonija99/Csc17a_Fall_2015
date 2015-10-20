@@ -24,6 +24,8 @@ public:
     int getMxHlth();
     //Returns current health
     int getCHlth();
+    //Returns stamina
+    int getStmna();
     
     //Sets damage 
     int attck(); 

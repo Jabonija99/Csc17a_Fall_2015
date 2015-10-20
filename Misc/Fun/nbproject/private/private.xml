@@ -7,10 +7,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/Player.cpp</file>
             <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/main.cpp</file>
-            <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/Enemy.h</file>
             <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/Enemy.cpp</file>
+            <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/Enemy.h</file>
+            <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/Player.cpp</file>
+            <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/Player.h</file>
+            <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/Game.cpp</file>
+            <file>file:/C:/Users/rcc/Documents/repos/JabonilloJarone_Csc17a_48983/Misc/Fun/Game.h</file>
         </group>
     </open-files>
 </project-private>

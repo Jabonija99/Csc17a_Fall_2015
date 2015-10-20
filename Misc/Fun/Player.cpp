@@ -69,7 +69,9 @@ int Player::getMxHlth(){
 void Player::modHlth(int value){
     pMxHlth += value; //Sets max health
 }
-
+int Player::getStmna(){
+    return pStmna;
+}
 int Player::attck(){
     //Generates a random number from 0 - 100 for crit %
     unsigned short int crit = rand()%101;
@@ -110,6 +112,12 @@ int Player::dmged(int eAtt){
     
     //Apply damage to health
     pCHlth -= dmg;
+    
+     //If the health drops below zero
+    if(pCHlth < 0){
+        //Set health to zero
+        pCHlth = 0;
+    }
     
     //Return the amount of damage recieved
     return dmg;
@@ -317,6 +325,8 @@ void Player::lvlUp(){
                 pts = 5;
             }
             else{ //If the user does select to quit
+                //Modify max health
+                modHlth(10);
                 //Modify the stats by the selected values
                 modStat(str,def,acc,dex,intl,luc);
             }
@@ -329,6 +339,9 @@ int Player::getLvl(){
     return pLvl; //Returns the player's level
 }
 bool Player::dead(){
+    if(pCHlth < 1){
+        pDead = true;
+    }
     //Returns death flag
     return pDead;
 }

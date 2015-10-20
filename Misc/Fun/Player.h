@@ -23,6 +23,8 @@ public:
     int getMxHlth();//Returns player's max health
     void modHlth(int);//Modifies player's max health
     
+    int getStmna(); //Returns the player's stamina
+    
     int attck(); //Sets the damage
     int dmged(int); //Calculates incoming damage 
     

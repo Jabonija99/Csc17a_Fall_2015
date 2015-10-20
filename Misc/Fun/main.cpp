@@ -32,6 +32,8 @@ void level(Player&, Game&, bool&);
 void arena(Player&,Game&, bool&);
 //Battle interface
 void bttlUi(Player&,Enemy&, bool&);
+//UI
+void ui(string, Player, Enemy);
 //Chapter one story
 void chp1(Player&, Game&);
 //Pseudo cls
@@ -41,6 +43,7 @@ void delay(int);
 
 int main(int argc, char** argv) {
     srand(time(0));
+    /*
     //User input
     int userIn;
     //Flag for exit
@@ -76,6 +79,12 @@ int main(int argc, char** argv) {
         }
         cls();
     }while(!quit);
+     */
+    bool lvComp = false;
+    Player hero;
+    Enemy foe("Demon", 10, 50, 10, 0, 80, 10, 10, 10);
+    bttlUi(hero, foe, lvComp);
+    
     
     return 0;
 }
@@ -227,24 +236,80 @@ void arena(Player &hero,Game &rpg, bool &lvComp){
 }
 
 void bttlUi(Player &hero,Enemy &foe, bool &lvComp){
+    int choice;
+    //Input validation
+    bool inVal;
+    
     
     do{
-        cout <<"===================================" 
-                <<"===================================" <<endl
-                <<"-----------------------------------"
-                <<"-----------------------------------" <<endl
-                <<left <<hero.name() 
-                <<right <<setw(52) 
-                <<foe.name() <<endl
-                <<left <<"HP: " <<hero.getCHlth() <<"/" <<hero.getMxHlth() 
-                <<right <<setw(40) 
-                <<foe.getCHlth() <<"/" <<foe.getMxHlth() <<":HP"<<endl;
-                <<left <<"Stamina: ";
-        delay(399999999);
-    
+        do{
+            cls();
+            ui("Fight!", hero, foe);
+            cout <<"1] Attack" <<endl
+                <<"2] Guard" <<endl
+                <<"3] Action" <<endl
+                <<"----------------------------"
+                <<"----------------------------" <<endl
+                <<"Enter: ";
+            cin >> choice;
+
+
+            inVal = true;
+
+            switch(choice){
+            case 1:
+                cls();
+                ui("Attack!", hero, foe);
+                cout <<hero.name() <<" attacks!" <<endl;
+                delay(399999999);
+                cout <<foe.name() <<" receives " <<foe.dmged(hero.attck())
+                        <<" damage!" <<endl;
+                delay(399999999);
+                break;
+            case 2:
+                cls();
+                ui("Guard", hero, foe);
+
+                break;
+            case 3:
+                cls();
+                ui("Action", hero, foe);
+                
+                break;
+            default:
+                cout <<"Invalid input!" <<endl;
+                inVal = false;
+                delay(399999999);
+                break;
+            }
+
+        } while(!inVal);
+        
+        if(foe.dead()){
+            cout << foe.name() <<" has fallen!" <<endl;
+            delay(399999999);
+        }
     }while(!hero.dead() && !foe.dead());
     
             
+}
+void ui(string title, Player hero, Enemy foe){
+    cout <<"============================" 
+            <<"============================" <<endl
+            <<right <<setw(30)<<title <<endl
+            <<"============================" 
+            <<"============================" <<endl
+            <<left <<hero.name() 
+            <<right <<setw(52) 
+            <<foe.name() <<endl
+            <<left <<"HP: " <<hero.getCHlth() <<"/" <<hero.getMxHlth() 
+            <<right <<setw(40) 
+            <<foe.getCHlth() <<"/" <<foe.getMxHlth() <<" :HP"<<endl
+            <<left <<"Stamina: " <<hero.getStmna() 
+            <<right <<setw(36)
+            <<foe.getStmna() <<" :Stamina" <<endl
+            <<"----------------------------"
+            <<"----------------------------" <<endl;
 }
 
 void chp1(Player&hero, Game&rpg){

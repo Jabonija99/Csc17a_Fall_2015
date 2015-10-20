@@ -37,6 +37,9 @@ int Enemy::getMxHlth(){
 int Enemy::getCHlth(){
     return eCHlth;
 } 
+int Enemy::getStmna(){
+    return eStmna;
+}
 int Enemy::attck(){
 //Generates a random number from 0 - 100 for crit %
     unsigned short int crit = rand()%101;
@@ -78,10 +81,19 @@ int Enemy::dmged(int pAtt){
     //Apply damage to health
     eCHlth -= dmg;
     
+    //If the health drops below zero
+    if(eCHlth < 0){
+        //Set health to zero
+        eCHlth = 0;
+    }
+    
     //Return the amount of damage recieved
     return dmg;
 }
 bool Enemy::dead(){
+    if(eCHlth < 1){
+        eDead = true;
+    }
     return eDead;
 }
 int Enemy::choice(){
