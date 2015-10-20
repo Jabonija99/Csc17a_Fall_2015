@@ -18,7 +18,6 @@ Game::Game(){
     //Set game completion and checkpoint to zero
     gCmplte = 0;
     gChckpt = 0;
-    //Create first save
 }
 void Game::modCmplte(int value){
     gCmplte += value;
@@ -53,6 +52,7 @@ bool Game::save(Player user){
     //Close the file
     gSave.close();
     
+    //Returns error status
     return error;
 }
 bool Game::load(Player&user, string name){
@@ -91,11 +91,14 @@ bool Game::load(Player&user, string name){
     //Close the file
     gLoad.close();
     
+    //Return error status
     return error;
 }
 int Game::getCmplte(){
+    //Return game complete percentage
     return gCmplte;
 }
 int Game::getChckpt(){
+    //Return game checkpoint
     return gChckpt;
 }

@@ -26,6 +26,9 @@ def, int acc, int dex, int intl, int luc){
     eInt = intl;
     eLuc = luc;
 }
+int Enemy::getMxHlth(){
+    return eMxHlth;
+}
 int Enemy::getCHlth(){
     return eCHlth;
 } 
@@ -33,7 +36,7 @@ int Enemy::attck(){
 //Generates a random number from 0 - 100 for crit %
     unsigned short int crit = rand()%101;
     //Sets the initial damage of the player by 70% of the strength
-    unsigned short int dmg = eStr*0.6;
+    unsigned short int dmg = eStr*0.7;
     //Generates a random number for hit/miss %
     unsigned short int hit = rand()%101;
     
@@ -73,4 +76,22 @@ int Enemy::dmged(int pAtt){
     //Return the amount of damage recieved
     return dmg;
 }
-
+bool Enemy::alive(){
+    bool lives = true;
+    
+    if(eCHlth < 1){
+        lives = false;
+    }
+    
+    return lives;
+}
+int Enemy::choice(){
+    //Enemy's chosen input
+    int eIn;
+    
+    //If current health is less than 10% of max hp
+    if(eCHlth < static_cast<float>(eMxHlth)*0.10){
+        //Select to heal
+        eIn = 4;
+    }
+}

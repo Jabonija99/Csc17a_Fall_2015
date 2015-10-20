@@ -26,15 +26,22 @@ private:
     ofstream gSave;
     
 public:
+    //Base constructor
     Game();
     
+    //Modify game completion %
     void modCmplte(int);
+    //Set game checkpoint
     void setChckpt(int);
     
+    //Return the game completion
     int getCmplte();
+    //Return the checkpoint
     int getChckpt();
     
+    //Load game
     bool load(Player&, string);
+    //Save game
     bool save(Player);
 };
 

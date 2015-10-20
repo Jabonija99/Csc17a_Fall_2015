@@ -17,16 +17,28 @@ public:
     //Parameters:enemy name, mxHlth, stmna, str, def,acc,dex,int,luc
     Enemy(string name, int, int, int, int ,int ,int, int, int);
     
-    int getCHlth(); //Returns current health
-    
-    int attck(); //Sets damage
-    int dmged(int pAtt); //Calculates and returns damage
+    //Returns max health
+    int getMxHlth();
+    //Returns current health
+    int getCHlth();
+    //Sets damage 
+    int attck(); 
+    //Calculates and returns damage received. 
+    int dmged(int pAtt); 
+    //Flag for death
+    bool alive();
+    //Enemy AI
+    int choice();
     
     
 private:
+    //Enemy name
     string eName;
+    //Enemy max/current health and stamina
     int eMxHlth, eCHlth, eStmna;
+    //Strength, defense, accuracy
     int eStr, eDef, eAcc;
+    //Dexterity, intelligence, luck
     int eDex, eInt, eLuc;
 };
 

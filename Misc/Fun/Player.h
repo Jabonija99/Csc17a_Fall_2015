@@ -35,6 +35,7 @@ public:
     void lvlUp(); //Level up 
     int getLvl(); //Returns level
     
+    bool dead(); //Returns death flag
     
     
 private:
@@ -45,6 +46,9 @@ private:
     int pStr, pDef, pAcc; //Combat stats
     int pDex, pInt, pLuc; //Social stats
     int pCExp, pMxExp, pLvl; //Current/max experience and level
+    
+    //Flag for player death
+    bool pDead;
 };
 
 

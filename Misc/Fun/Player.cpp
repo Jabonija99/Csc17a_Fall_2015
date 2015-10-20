@@ -30,6 +30,8 @@ Player::Player(){
     pCExp = 0; //Current Experience
     pMxExp = 100; //Max Experience to level
     pLvl = 1; //Current level
+    
+    pDead = false;
 }
 Player::Player(string name){
     pName = name; //Player Name
@@ -48,6 +50,8 @@ Player::Player(string name){
     pCExp = 0; //Current Experience
     pMxExp = 100; //Max Experience to level
     pLvl = 1; //Current level
+    
+    pDead = false;
 }
 string Player::name(){
     return pName;
@@ -324,10 +328,14 @@ void Player::lvlUp(){
 int Player::getLvl(){
     return pLvl; //Returns the player's level
 }
-
+bool Player::dead(){
+    //Returns death flag
+    return pDead;
+}
 
 void Player::cls(){
     for(int i = 0; i < 10; i++){
         cout <<endl;
     }
 }
+
