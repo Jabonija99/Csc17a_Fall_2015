@@ -39,7 +39,7 @@ void shop(Player&, Game&);
 //Battle interface
 void bttlUi(Player&, Enemy&, bool&);
 void ui(string, Player, Enemy);
-void use(Player&, Enemy);
+void use(Player&, Enemy, bool&);
 
 //Story chapters
 void chp1(Player&, Game&);
@@ -490,7 +490,8 @@ void bttlUi(Player &hero,Enemy &foe, bool &lvComp){
                         cout <<hero.name() <<" raises his guard!" <<endl;
                         break;
                     case 3:
-                        use(hero, foe);
+                        //Call item use function
+                        use(hero, foe, inVal);
                         break;
                     default:
                         //Prompt invalid input
@@ -652,7 +653,7 @@ void ui(string title, Player hero, Enemy foe){
             <<"----------------------------"
             <<"----------------------------" <<endl;
 }
-void use(Player&hero, Enemy foe){
+void use(Player &hero, Enemy foe, bool &inVal){
     //user input
     int ans;
     //Clear screen
@@ -660,11 +661,12 @@ void use(Player&hero, Enemy foe){
     //Screen title
     ui("Inventory", hero, foe);
     //If inventory is empty
-    if(hero.sizeInv() == 0){
+    if(hero.sizeInv() < 1){
         //Prompt empty inventory
         cout <<"Inventory Empty!" <<endl
                 <<"----------------------------"
                 <<"----------------------------" <<endl;
+        inVal = false;
         //Delay text
         delay(399999999);
     }
@@ -674,6 +676,9 @@ void use(Player&hero, Enemy foe){
             cout <<i+1 <<"] ";
             //Outputs item base on number
             switch(hero.getItm(i)){
+                case 0:
+                    cout <<i+1 <<"] (Empty)" <<endl;
+                    break;
                 case 1:
                     cout <<i+1 <<"] Health potion" <<endl; 
                     break;
@@ -682,26 +687,112 @@ void use(Player&hero, Enemy foe){
                     break;
                 default:
                     break;
-             }
+            }
         }
-        cout <<"----------------------------"
+        cout <<"6] Back" <<endl
+                <<"----------------------------"
                 <<"----------------------------" <<endl;
         cin >> ans;
         
         switch(ans){
             case 1:
+                if(hero.sizeInv() > 0){
+                    switch(hero.getItm(ans-1)){
+                        case 1:
+                            cout <<hero.name() <<" uses health potion!" <<endl;
+                            hero.modCHlth(10);
+                            //Delay text
+                            delay(399999999);
+                            break;
+                        case 2:
+                            cout <<hero.name() <<" casts the mystic glove!" 
+                                    <<endl;
+                            //Delay text
+                            delay(399999999);
+                            cout <<hero.name() <<" heals " <<hero.heal() 
+                                    <<" hp!" <<endl;
+                            break;
+                        default:
+                            inVal = false;
+                            break;
+                    }
+                }
                 break;
             case 2:
+                if(hero.sizeInv() > 1){
+                    switch(hero.getItm(ans-1)){
+                        case 1:
+                            cout <<hero.name() <<" uses health potion!" <<endl;
+                            hero.modCHlth(10);
+                            break;
+                        case 2:
+                            cout <<hero.name() <<" casts the mystic glove!" 
+                                    <<endl;
+                            hero.heal();
+                            break;
+                        default:
+                            inVal = false;
+                            break;
+                    }
+                }
                 break;
             case 3:
+                if(hero.sizeInv() > 2){
+                    switch(hero.getItm(ans-1)){
+                        case 1:
+                            cout <<hero.name() <<" uses health potion!" <<endl;
+                            hero.modCHlth(10);
+                            break;
+                        case 2:
+                            cout <<hero.name() <<" casts the mystic glove!" 
+                                    <<endl;
+                            hero.heal();
+                            break;
+                        default:
+                            inVal = false;
+                            break;
+                    }
+                }
                 break;
             case 4:
+                if(hero.sizeInv() > 3){
+                    switch(hero.getItm(ans-1)){
+                        case 1:
+                            cout <<hero.name() <<" uses health potion!" <<endl;
+                            hero.modCHlth(10);
+                            break;
+                        case 2:
+                            cout <<hero.name() <<" casts the mystic glove!" 
+                                    <<endl;
+                            hero.heal();
+                            break;
+                        default:
+                            inVal = false;
+                            break;
+                    }
+                }
                 break;
             case 5:
+                if(hero.sizeInv() > 4){
+                    switch(hero.getItm(ans-1)){
+                        case 1:
+                            cout <<hero.name() <<" uses health potion!" <<endl;
+                            hero.modCHlth(10);
+                            break;
+                        case 2:
+                            cout <<hero.name() <<" casts the mystic glove!" 
+                                    <<endl;
+                            hero.heal();
+                            break;
+                        default:
+                            inVal = false;
+                            break;
+                    }
+                }
                 break;
-            case 6:
+            default:
+                inVal = false;
                 break;
-        
         }
     }
     

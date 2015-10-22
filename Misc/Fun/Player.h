@@ -23,7 +23,8 @@ public:
     
     int getCHlth();//Returns player's current health
     int getMxHlth();//Returns player's max health
-    void modHlth(int);//Modifies player's max health
+    void modCHlth(int);//Modifies player's current health
+    void modHlth(int);//Modifies player's max healh
     
     void modStmn(int); //Modifies player stamina
     int getStmna(); //Returns the player's stamina
@@ -33,6 +34,7 @@ public:
     void guard(int); //Set Player guard status
     bool blck(); //Flag for player guard
     bool stun(); // Return player stunned flag
+    int heal();//Calculates health regen and returns value
     
     void modStat(int, int, int, int, int, int); //Modifies stats
     void seeStat(); //Displays stats

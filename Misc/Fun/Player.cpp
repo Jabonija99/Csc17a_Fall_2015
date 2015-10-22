@@ -81,8 +81,11 @@ int Player::getCHlth(){
 int Player::getMxHlth(){
     return pMxHlth; //Returns the max health
 }
+void Player::modCHlth(int val){
+    pCHlth += val; //Modifies current health based on value
+}
 void Player::modHlth(int value){
-    pMxHlth += value; //Sets max health
+    pMxHlth += value; //Modifies max health based on value
 }
 void Player::modStmn(int val){
     pStmna += val; //Increases stamina by the value
@@ -172,6 +175,26 @@ bool Player::stun(){
     }
 
 }
+int Player::heal(){
+    
+    if(pStmna > 10){
+        //Calculates heal with intelligence
+        int hl = 5 + (pInt*0.5);
+
+        //Applies heal to current health
+        pCHlth += hl;
+        
+        //Decrement stamina
+        pStmna -= 10;
+        
+        //Return healing value
+        return hl;
+    }
+    else{
+        return 0;
+    }
+    
+}
 
 void Player::modStat(int str, int def, int acc, int dex, int intl, int luc){
     pStr += str; // Modifies strength
@@ -191,6 +214,8 @@ void Player::seeStat(){
                 <<"Hp: " <<pCHlth <<"/" <<pMxHlth
                 <<setw(10) <<"Exp: " <<pCExp <<"/" <<pMxExp <<endl
                 <<"Stamina: " <<pStmna <<endl
+                <<"--------------------------------" <<endl
+                <<setw(18) <<"Stats" <<endl
                 <<"--------------------------------" <<endl
                 <<"Str: " <<pStr <<endl
                 <<"Def: " <<pDef <<endl
@@ -216,7 +241,10 @@ void Player::seeStat(){
                             <<endl <<"Hp: " <<pCHlth <<"/" <<pMxHlth
                             <<setw(10) <<"Exp: " <<pCExp <<"/" <<pMxExp <<endl
                             <<"Stamina: " <<pStmna <<endl
+                            <<"--------------------------------" <<endl
+                            <<setw(20) <<"Inventory" <<endl
                             <<"--------------------------------" <<endl;
+                    
                     //if inventory empty
                     if(pInv->cap == 0){
                         //Prompt empty inventory
