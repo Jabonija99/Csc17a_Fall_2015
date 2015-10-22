@@ -694,21 +694,30 @@ void use(Player &hero, Enemy foe, bool &inVal){
                 <<"----------------------------" <<endl;
         cin >> ans;
         
+        //Use selected item
         switch(ans){
             case 1:
+                //If there is an item
                 if(hero.sizeInv() > 0){
+                    //Use item
                     switch(hero.getItm(ans-1)){
+                        //If the item is 1
                         case 1:
+                            //Use HP potion
                             cout <<hero.name() <<" uses health potion!" <<endl;
+                            //Increment health
                             hero.modCHlth(10);
                             //Delay text
                             delay(399999999);
                             break;
+                        //If item 2
                         case 2:
+                            //Use healing glove
                             cout <<hero.name() <<" casts the mystic glove!" 
                                     <<endl;
                             //Delay text
                             delay(399999999);
+                            //Apply healing effects
                             cout <<hero.name() <<" heals " <<hero.heal() 
                                     <<" hp!" <<endl;
                             break;
@@ -716,78 +725,138 @@ void use(Player &hero, Enemy foe, bool &inVal){
                             inVal = false;
                             break;
                     }
+                    //Remove item
+                    hero.remItm(ans - 1);
                 }
                 break;
             case 2:
+                //If there is an item
                 if(hero.sizeInv() > 1){
+                    //Use item
                     switch(hero.getItm(ans-1)){
+                        //If the item is 1
                         case 1:
+                            //Use HP potion
                             cout <<hero.name() <<" uses health potion!" <<endl;
+                            //Increment health
                             hero.modCHlth(10);
+                            //Delay text
+                            delay(399999999);
                             break;
+                        //If item 2
                         case 2:
+                            //Use healing glove
                             cout <<hero.name() <<" casts the mystic glove!" 
                                     <<endl;
-                            hero.heal();
+                            //Delay text
+                            delay(399999999);
+                            //Apply healing effects
+                            cout <<hero.name() <<" heals " <<hero.heal() 
+                                    <<" hp!" <<endl;
                             break;
                         default:
                             inVal = false;
                             break;
                     }
+                    //Remove item
+                    hero.remItm(ans - 1);
+                    
                 }
                 break;
             case 3:
                 if(hero.sizeInv() > 2){
+                    //Use item
                     switch(hero.getItm(ans-1)){
+                        //If the item is 1
                         case 1:
+                            //Use HP potion
                             cout <<hero.name() <<" uses health potion!" <<endl;
+                            //Increment health
                             hero.modCHlth(10);
+                            //Delay text
+                            delay(399999999);
                             break;
+                        //If item 2
                         case 2:
+                            //Use healing glove
                             cout <<hero.name() <<" casts the mystic glove!" 
                                     <<endl;
-                            hero.heal();
+                            //Delay text
+                            delay(399999999);
+                            //Apply healing effects
+                            cout <<hero.name() <<" heals " <<hero.heal() 
+                                    <<" hp!" <<endl;
                             break;
                         default:
                             inVal = false;
                             break;
                     }
+                    //Remove item
+                    hero.remItm(ans - 1);
                 }
                 break;
             case 4:
                 if(hero.sizeInv() > 3){
+                    //Use item
                     switch(hero.getItm(ans-1)){
+                        //If the item is 1
                         case 1:
+                            //Use HP potion
                             cout <<hero.name() <<" uses health potion!" <<endl;
+                            //Increment health
                             hero.modCHlth(10);
+                            //Delay text
+                            delay(399999999);
                             break;
+                        //If item 2
                         case 2:
+                            //Use healing glove
                             cout <<hero.name() <<" casts the mystic glove!" 
                                     <<endl;
-                            hero.heal();
+                            //Delay text
+                            delay(399999999);
+                            //Apply healing effects
+                            cout <<hero.name() <<" heals " <<hero.heal() 
+                                    <<" hp!" <<endl;
                             break;
                         default:
                             inVal = false;
                             break;
                     }
+                    //Remove item
+                    hero.remItm(ans - 1);
                 }
                 break;
             case 5:
                 if(hero.sizeInv() > 4){
+                    //Use item
                     switch(hero.getItm(ans-1)){
+                        //If the item is 1
                         case 1:
+                            //Use HP potion
                             cout <<hero.name() <<" uses health potion!" <<endl;
+                            //Increment health
                             hero.modCHlth(10);
+                            //Delay text
+                            delay(399999999);
                             break;
+                        //If item 2
                         case 2:
+                            //Use healing glove
                             cout <<hero.name() <<" casts the mystic glove!" 
                                     <<endl;
-                            hero.heal();
+                            //Delay text
+                            delay(399999999);
+                            //Apply healing effects
+                            cout <<hero.name() <<" heals " <<hero.heal() 
+                                    <<" hp!" <<endl;
                             break;
                         default:
                             inVal = false;
                             break;
                     }
+                    //Remove item
+                    hero.remItm(ans - 1);
                 }
                 break;
             default:
@@ -833,8 +902,6 @@ void chp1(Player&hero, Game&rpg){
     }
     else{
         //Dialogue
-        
-        hero.createInv();
         hero.incInv(3);
         //Increment percentage completed
         rpg.modCmplte(10); //Total: 11

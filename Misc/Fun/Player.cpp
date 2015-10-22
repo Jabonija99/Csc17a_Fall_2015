@@ -39,8 +39,9 @@ Player::Player(){
     
     pStun = 0; //Stun chance
     
-    
-    pInv = new Inv;
+   
+    pInv = new Inv; //Create new inv
+    crtInv(); //Create player inv
 }
 Player::Player(string name){
     pName = name; //Player Name
@@ -60,12 +61,14 @@ Player::Player(string name){
     pMxExp = 100; //Max Experience to level
     pLvl = 1; //Current level
     
-    pDead = false;
-    pBlck = false;
+    pDead = false; //Death flag
+    pBlck = false; //Guard flag
     
-    pStun = 0;
+    pStun = 0; //Stun chance
     
-    pInv = new Inv;
+   
+    pInv = new Inv; //Create new inv
+    crtInv(); //Create player inv
 }
 
 string Player::name(){
@@ -328,6 +331,12 @@ int Player::getStat(int stat){
         case 12:
             return pLvl;
             break;
+        case 13:
+            return pInv->cap;
+            break;
+        case 14:
+            return pInv->size;
+            break;
     }
 }
 void Player::setStat(int stat, int value){
@@ -368,6 +377,12 @@ void Player::setStat(int stat, int value){
             break;
         case 12:
             pLvl = value;
+            break;
+        case 13:
+            pInv->cap = value;
+            break;
+        case 14:
+            pInv->size = value;
             break;
     }
 }
@@ -483,7 +498,7 @@ bool Player::dead(){
     //Returns death flag
     return pDead;
 }
-void Player::createInv(){
+void Player::crtInv(){
     //Inventory
     pInv->max = 5; //Max cap
     pInv->cap = 0; //Capacity
@@ -514,6 +529,24 @@ bool Player::setItm(int itm){
         return false;
     }
 }
+void Player::remItm(int numItm){
+    //Set item number to zero
+    pInv->stck[numItm] = 0;
+    
+    //Sort inventory
+    for(int i = 0; i < pInv->size; i++){
+        for(int j = i; j < pInv->size -1; j++){
+            if(pInv->stck[j] < pInv->stck[j+1]){
+                int temp = pInv->stck[j];
+                pInv->stck[j] = pInv->stck[j+1];
+                pInv->stck[j+1] = temp;
+            }
+        }
+    }
+    
+    //Decrement size
+    pInv->size--;
+}
 
 int Player::getItm(int val){
     switch(val){
@@ -542,7 +575,9 @@ int Player::getItm(int val){
 
 
 void Player::fillInv(){
-    for(int i = 0; i < 5; i++){
+    //For the maximum size of the array
+    for(int i = 0; i < pInv->max; i++){
+        //Fill array with zeros
         pInv->stck[i] = 0;
     }
 }

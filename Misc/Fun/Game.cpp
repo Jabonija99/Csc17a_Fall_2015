@@ -49,7 +49,7 @@ bool Game::save(Player user){
                 <<gCmplte <<endl
                 <<gChckpt <<endl;
         //Retrieves all of the stats
-        for (int i = 1; i < 13; i++){
+        for (int i = 1; i < 15; i++){
             gSave <<user.getStat(i) <<endl;
         }
     }
@@ -88,7 +88,7 @@ bool Game::load(Player&user, string name){
         gChckpt = chckpt;
         
         //Sets all of the stats
-        for(int i = 1; i < 13; i++){
+        for(int i = 1; i < 15; i++){
             //Retrieves stat
             gLoad >> stat;
             //Assigns value to the correct stat

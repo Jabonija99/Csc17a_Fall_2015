@@ -47,10 +47,12 @@ public:
     
     bool dead(); //Returns death flag
     
-    void createInv(); //Creates inventory for player
+    void crtInv(); //Creates inventory for player
     void incInv(int); //Increases inventory size
     int sizeInv(); // Returns inventory size
+    
     bool setItm(int); //Sets item to inventory
+    void remItm(int); //Removes item
     int getItm(int); //Returns indicated item
     
 private:
