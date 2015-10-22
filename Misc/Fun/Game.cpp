@@ -11,20 +11,25 @@
 
 #include "Game.h"
 #include "Player.h"
+#include "Inv.h"
 
 using namespace std;
 
 Game::Game(){
-    //Set game completion and checkpoint to zero
+    //Set initial game completion and checkpoint values
     gCmplte = 0;
-    gChckpt = 0;
+    gChckpt = 1;
 }
-void Game::modCmplte(int value){
-    gCmplte += value;
+
+void Game::modCmplte(int val){
+    //Increment completion % by the given value
+    gCmplte += val;
 }
-void Game::setChckpt(int value){
-    gChckpt = value;
+void Game::setChckpt(int val){
+    //Set checkpoint to indicated value
+    gChckpt = val;
 }
+
 bool Game::save(Player user){
     //Error checker
     bool error = true;
@@ -75,8 +80,11 @@ bool Game::load(Player&user, string name){
     else{
         //Load information from file
         gLoad >>name >>cmplte >>chckpt;
+        //Assign name
         user.setName(name);
+        //Assign completion %
         gCmplte = cmplte;
+        //Assign checkpoint
         gChckpt = chckpt;
         
         //Sets all of the stats
@@ -94,6 +102,7 @@ bool Game::load(Player&user, string name){
     //Return error status
     return error;
 }
+
 int Game::getCmplte(){
     //Return game complete percentage
     return gCmplte;

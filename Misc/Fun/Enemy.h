@@ -6,6 +6,8 @@
  */
 #include <string>
 
+#include "Player.h"
+
 using namespace std;
 
 #ifndef ENEMY_H
@@ -14,8 +16,8 @@ using namespace std;
 class Enemy{
 public:
     //Base constructor
-    //Parameters:enemy name, mxHlth, stmna, str, def,acc,dex,int,luc
-    Enemy(string name, int, int, int, int ,int ,int, int, int);
+    //Parameters:enemy name, mxHlth, stmna, str, def,acc,dex,int,luc, exp
+    Enemy(string name, int, int, int, int ,int ,int, int, int, int);
     
     //Returns enemy name
     string name();
@@ -31,11 +33,21 @@ public:
     int attck(); 
     //Calculates and returns damage received. 
     int dmged(int pAtt); 
+    //Set blocking status
+    void guard(int);
+    //Returns block flag
+    bool blck();
+    //Calculates and returns stun status
+    bool stun();
+    //Calculates health regen and returns value
+    int heal();
     
+    //Returns experience
+    int exp();
     //Flag for death
     bool dead();
     //Enemy AI
-    int choice();
+    int choice(Player);
     
     
 private:
@@ -47,8 +59,11 @@ private:
     int eStr, eDef, eAcc;
     //Dexterity, intelligence, luck
     int eDex, eInt, eLuc;
-    //Enemy death flag
-    bool eDead;
+    //Stun chance and experience amount
+    int eStun, eExp;
+    
+    //Enemy death and block flag
+    bool eDead, eBlck;
 };
 
 #endif	/* ENEMY_H */

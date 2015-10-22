@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include "Player.h"
+#include "Inv.h"
 
 //using namespace std;
 

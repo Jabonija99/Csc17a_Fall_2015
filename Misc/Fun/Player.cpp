@@ -9,20 +9,22 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+
 #include "Player.h"
+#include "Inv.h"
 
 using namespace std;
 
 Player::Player(){
     pName = "Hero"; //Player Name
     
-    pMxHlth = 10; //Max Health
-    pCHlth = 10; //Current Health
-    pStmna = 10; //Stamina
+    pMxHlth = 100; //Max Health
+    pCHlth = 100; //Current Health
+    pStmna = 20; //Stamina
     
-    pStr = 5; //Strength
+    pStr = 20; //Strength
     pDef = 5; //Defense
-    pAcc = 70; //Accuracy
+    pAcc = 80; //Accuracy
     pDex = 5; //Dexterity
     pInt = 5; //Intelligence
     pLuc = 5; //Luck
@@ -31,18 +33,25 @@ Player::Player(){
     pMxExp = 100; //Max Experience to level
     pLvl = 1; //Current level
     
-    pDead = false;
+    
+    pDead = false; //Death flag
+    pBlck = false; //Guard flag
+    
+    pStun = 0; //Stun chance
+    
+    
+    pInv = new Inv;
 }
 Player::Player(string name){
     pName = name; //Player Name
     
-    pMxHlth = 10; //Max Health
-    pCHlth = 10; //Current Health
-    pStmna = 10; //Stamina
+    pMxHlth = 100; //Max Health
+    pCHlth = 100; //Current Health
+    pStmna = 20; //Stamina
     
-    pStr = 5; //Strength
+    pStr = 20; //Strength
     pDef = 5; //Defense
-    pAcc = 70; //Accuracy
+    pAcc = 80; //Accuracy
     pDex = 5; //Dexterity
     pInt = 5; //Intelligence
     pLuc = 5; //Luck
@@ -52,7 +61,13 @@ Player::Player(string name){
     pLvl = 1; //Current level
     
     pDead = false;
+    pBlck = false;
+    
+    pStun = 0;
+    
+    pInv = new Inv;
 }
+
 string Player::name(){
     return pName;
 }
@@ -69,14 +84,18 @@ int Player::getMxHlth(){
 void Player::modHlth(int value){
     pMxHlth += value; //Sets max health
 }
+void Player::modStmn(int val){
+    pStmna += val; //Increases stamina by the value
+}
 int Player::getStmna(){
     return pStmna;
 }
+
 int Player::attck(){
     //Generates a random number from 0 - 100 for crit %
     unsigned short int crit = rand()%101;
-    //Sets the initial damage of the player by 70% of the strength
-    unsigned short int dmg = pStr*0.7;
+    //Sets the initial damage of the player by 80% of the strength
+    unsigned short int dmg = pStr*0.8;
     //Generates a random number for hit/miss %
     unsigned short int hit = rand()%101;
     
@@ -122,6 +141,37 @@ int Player::dmged(int eAtt){
     //Return the amount of damage recieved
     return dmg;
 }
+void Player::guard(int val){
+    if(val == 1){
+        pBlck = true;
+    }
+    else{
+        pBlck = false;
+    }
+}
+bool Player::blck(){
+    return pBlck;
+}
+bool Player::stun(){
+    //Increment stun chances
+    pStun++;
+    
+    //Generate random number for stun chance
+    int stun = rand()%101;
+    
+    //Minimum of 10% chance to get stunned
+    if(stun < 10 + (pStun*10)){
+        //Reset increased stun increment
+        pStun = 0;
+        //Return stunned flag
+        return true;
+    }
+    else{
+        //Return false stunned flag
+        return false;
+    }
+
+}
 
 void Player::modStat(int str, int def, int acc, int dex, int intl, int luc){
     pStr += str; // Modifies strength
@@ -132,13 +182,15 @@ void Player::modStat(int str, int def, int acc, int dex, int intl, int luc){
     pLuc += luc; //Luck
 }
 void Player::seeStat(){
-    int quit = 0;
+    bool quit = false;
+    int ans = 0;
     do{
-        cout <<"--------------------------------" <<endl
-                <<"============ Stats =============" <<endl
+        cout <<"=========== Profile ============" <<endl
+                <<"--------------------------------" <<endl
                 <<"Name: " <<pName <<setw(10) <<"Lvl: " <<pLvl <<endl
                 <<"Hp: " <<pCHlth <<"/" <<pMxHlth
                 <<setw(10) <<"Exp: " <<pCExp <<"/" <<pMxExp <<endl
+                <<"Stamina: " <<pStmna <<endl
                 <<"--------------------------------" <<endl
                 <<"Str: " <<pStr <<endl
                 <<"Def: " <<pDef <<endl
@@ -147,10 +199,66 @@ void Player::seeStat(){
                 <<"Int: " <<pInt <<endl
                 <<"Luc: " <<pLuc <<endl
                 <<"--------------------------------" <<endl
+                <<"1] Inventory" <<endl
+                <<"2] Exit" <<endl
                 <<"================================" <<endl;
-        cout <<"Enter -1 to quit: ";
-        cin >> quit;
-    }while(quit != -1);
+        cout <<"Select: ";
+        cin >> ans;
+        
+        switch(ans){
+            case 1:
+                //Output inventory
+                do{
+                    cls();
+                    cout <<"=========== Profile ============" <<endl
+                            <<"--------------------------------" <<endl
+                            <<"Name: " <<pName <<setw(10) <<"Lvl: " <<pLvl 
+                            <<endl <<"Hp: " <<pCHlth <<"/" <<pMxHlth
+                            <<setw(10) <<"Exp: " <<pCExp <<"/" <<pMxExp <<endl
+                            <<"Stamina: " <<pStmna <<endl
+                            <<"--------------------------------" <<endl;
+                    //if inventory empty
+                    if(pInv->cap == 0){
+                        //Prompt empty inventory
+                        cout <<"No Inventory" <<endl;
+                    }
+                    else{
+                        //Output inventory
+                        for(int i = 0; i < pInv->cap; i++){
+                            switch(pInv->stck[i]){
+                                case 1:
+                                    cout <<i+1 <<"] Health potion" <<endl; 
+                                    break;
+                                case 2:
+                                    cout <<i+1 <<"] Mystic Glove" <<endl; 
+                                    break;
+                                default:
+                                    cout <<i+1 <<"] " <<endl;
+                                    break;
+                            }
+                        }
+                    
+                    }
+                    
+                    cout <<"--------------------------------" <<endl
+                        <<"1] Profile" <<endl
+                        <<"2] Exit" <<endl
+                        <<"================================" <<endl;
+                    cout <<"Select: ";
+                    cin >> ans;
+                    
+                    if(ans == 2){
+                        return;
+                    }
+                }while(ans != 1);
+                cls();
+                break;
+            case 2:
+                quit = true;
+                break;
+        }
+        
+    }while(!quit);
     cls();
 }
 int Player::getStat(int stat){
@@ -327,6 +435,8 @@ void Player::lvlUp(){
             else{ //If the user does select to quit
                 //Modify max health
                 modHlth(10);
+                //Modify player stamina
+                modStmn(5);
                 //Modify the stats by the selected values
                 modStat(str,def,acc,dex,intl,luc);
             }
@@ -345,10 +455,72 @@ bool Player::dead(){
     //Returns death flag
     return pDead;
 }
+void Player::createInv(){
+    //Inventory
+    pInv->max = 5; //Max cap
+    pInv->cap = 0; //Capacity
+    pInv->size = 0; //Size
+    pInv->stck = new int[pInv->max];
+    fillInv();
+}
+void Player::incInv(int val){
+    //Sets allowable capacity
+    pInv->cap = val;
+}
+int Player::sizeInv(){
+    return pInv->size;
+}
 
-void Player::cls(){
-    for(int i = 0; i < 10; i++){
-        cout <<endl;
+bool Player::setItm(int itm){
+    //If there is enough room
+    if(pInv->size < pInv->cap){
+        //Set item to current slot
+        pInv->stck[pInv->size] = itm;
+        //Increment size
+        pInv->size++;
+        //Return confirm
+        return true;
+    }
+    else{
+        //Returns error
+        return false;
     }
 }
 
+int Player::getItm(int val){
+    switch(val){
+        case 0:
+            //Returns item 1
+            return pInv->stck[0];
+            break;
+        case 1:
+            //Returns item 2
+            return pInv->stck[1];
+            break;
+        case 2:
+            //Returns item 3
+            return pInv->stck[2];
+            break;
+        case 3:
+            //Returns item 4
+            return pInv->stck[3];
+            break;
+        case 4:
+            //Returns item 5
+            return pInv->stck[4];
+            break;
+    }
+}
+
+
+void Player::fillInv(){
+    for(int i = 0; i < 5; i++){
+        pInv->stck[i] = 0;
+    }
+}
+
+void Player::cls(){
+    for(int i = 0; i < 20; i++){
+        cout <<endl;
+    }
+}

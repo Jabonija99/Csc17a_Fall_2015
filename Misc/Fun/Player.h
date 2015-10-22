@@ -6,6 +6,8 @@
  */
 
 #include <string>
+
+#include "Inv.h"
 using namespace std;
 
 #ifndef PLAYER_H
@@ -23,10 +25,14 @@ public:
     int getMxHlth();//Returns player's max health
     void modHlth(int);//Modifies player's max health
     
+    void modStmn(int); //Modifies player stamina
     int getStmna(); //Returns the player's stamina
     
     int attck(); //Sets the damage
-    int dmged(int); //Calculates incoming damage 
+    int dmged(int); //Calculates incoming damage
+    void guard(int); //Set Player guard status
+    bool blck(); //Flag for player guard
+    bool stun(); // Return player stunned flag
     
     void modStat(int, int, int, int, int, int); //Modifies stats
     void seeStat(); //Displays stats
@@ -39,8 +45,14 @@ public:
     
     bool dead(); //Returns death flag
     
+    void createInv(); //Creates inventory for player
+    void incInv(int); //Increases inventory size
+    int sizeInv(); // Returns inventory size
+    bool setItm(int); //Sets item to inventory
+    int getItm(int); //Returns indicated item
     
 private:
+    void fillInv();
     void cls();
     
     string pName; //Player name
@@ -48,9 +60,12 @@ private:
     int pStr, pDef, pAcc; //Combat stats
     int pDex, pInt, pLuc; //Social stats
     int pCExp, pMxExp, pLvl; //Current/max experience and level
+    int pStun; //Stun chance
     
-    //Flag for player death
-    bool pDead;
+    //Flag for player death and guard
+    bool pDead, pBlck;
+    //Player inventory
+    Inv *pInv;
 };
 
 
