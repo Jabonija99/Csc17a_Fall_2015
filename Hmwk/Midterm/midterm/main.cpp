@@ -48,7 +48,8 @@ ResltSt *avgMde(int *, int);
 void prntSt(ResltSt *);
 
 void problem4();
-int encrpt(int);
+int encrpt(int, bool &);
+int decrpt(int, bool&);
 
 void problem5();
 void problem6();
@@ -322,9 +323,9 @@ ResltSt *avgMde(int *aNum, int aSize){
     ResltSt *stat = new ResltSt[cap];// Size of array
     bool dup = false; //Flag for duplicates
     int k = 0; //Counter
-    
+    //If array is empty
     if(aSize == 0){
-        stat->mxFrq = 0;
+        stat->mxFrq = 0;//Set max freq to 0
     }
     else{    
         stat->mxFrq = 1; //Set max frequency to 1
@@ -455,26 +456,99 @@ void problem4(){
             //Flag invalid input
             inVal = false;
         }
-        else{
-            //Flag valid input
-            inVal = true;
-        }
         
     }while(!inVal);
     
     //Encryption
+    int eData = encrpt(usrIn, inVal);
     
-    
-    
-    
+    cout <<"Encrypted data: " <<eData <<endl;
+    if(!inVal){
+        cout <<"Encryption error detected!" <<endl;
+    }
+    cout <<"=============================" <<endl
+            <<"Enter any number to quit: ";
+    cin >> usrIn;
 }
-int encrpt(int data){
+int encrpt(int data, bool&inVal){
+    //Variables for each digit
     int dig1, dig2, dig3, dig4;
+    //Encrypted data
+    int eData;
     
+    //Assign each digit to respective places
     dig1 = (data/1000);
     dig2 = (data/100) - (dig1*10);
-    dig3 = (data/10) - ((dig1*100))
+    dig3 = (data/10) - ((dig1*100)+(dig2*10));
+    dig4 = data - ((dig1*1000)+(dig2*100)+(dig3*10));
     
+    //Add five to each digit
+    dig1+=5;
+    dig2+=5;
+    dig3+=5;
+    dig4+=5;
+    
+    //Mod each digit by eight to retain base
+    dig1%=8;
+    dig2%=8;
+    dig3%=8;
+    dig4%=8;    
+    
+    //Swap digits
+    //Assign temporary variables
+    int temp1 = dig1;
+    int temp2 = dig3;
+    //Swap first and second digits
+    dig1 = dig2;
+    dig2 = temp1;
+    //Swap third and fourth digits
+    dig3 = dig4;
+    dig4 = temp2;
+    
+    if(dig1 > 7 || dig2 > 7 || dig3 > 7 || dig4 >7){
+        inVal = false;
+    }
+    
+    //Reassign new digits to encrypted data variable
+    eData = (dig1*1000)+(dig2*100)+(dig3*10)+(dig4);
+    
+    //Return encrypted data
+    return eData;
+}
+int decrpt(int eData, bool&inVal){
+    //Variables for each digit
+    int dig1, dig2, dig3, dig4;
+    //Encrypted data
+    int data;
+    
+    //Assign each digit to respective places
+    dig1 = (eData/1000);
+    dig2 = (eData/100) - (dig1*10);
+    dig3 = (eData/10) - ((dig1*100)+(dig2*10));
+    dig4 = eData - ((dig1*1000)+(dig2*100)+(dig3*10));
+    
+    
+    
+    //Swap digits
+    //Assign temporary variables
+    int temp1 = dig1;
+    int temp2 = dig3;
+    //Swap first and second digits
+    dig1 = dig2;
+    dig2 = temp1;
+    //Swap third and fourth digits
+    dig3 = dig4;
+    dig4 = temp2;
+    
+    if(dig1 > 7 || dig2 > 7 || dig3 > 7 || dig4 >7){
+        inVal = false;
+    }
+    
+    //Reassign new digits to encrypted data variable
+    data = (dig1*1000)+(dig2*100)+(dig3*10)+(dig4);
+    
+    //Return encrypted data
+    return data;
 }
 
 void problem5(){
