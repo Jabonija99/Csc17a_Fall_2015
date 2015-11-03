@@ -49,7 +49,7 @@ void prntSt(ResltSt *);
 
 void problem4();
 int encrpt(int, bool &);
-int decrpt(int, bool&);
+int decrpt(int);
 
 void problem5();
 void problem6();
@@ -431,8 +431,8 @@ void problem4(){
     bool inVal;
     cls();
     cout<<"In problem # 4"<<endl<<endl;
-    
     do{
+        do{
         inVal = true;
         
         cout <<"Enter data numbers: ";
@@ -457,18 +457,23 @@ void problem4(){
             inVal = false;
         }
         
-    }while(!inVal);
+        }while(!inVal);
+
+        //Encryption
+        int eData = encrpt(usrIn, inVal);
+        int dData = decrpt(eData);
+
+        cout <<"Encrypted data: " <<eData <<endl;
+        if(!inVal){
+            cout <<"Encryption error detected!" <<endl;
+        }
+        cout <<"Decrypted data: " <<dData <<endl;
+        cout <<"=============================" <<endl
+                <<"Enter any -1 to quit: ";
+        cin >> usrIn;
     
-    //Encryption
-    int eData = encrpt(usrIn, inVal);
+    }while(usrIn != -1);
     
-    cout <<"Encrypted data: " <<eData <<endl;
-    if(!inVal){
-        cout <<"Encryption error detected!" <<endl;
-    }
-    cout <<"=============================" <<endl
-            <<"Enter any number to quit: ";
-    cin >> usrIn;
 }
 int encrpt(int data, bool&inVal){
     //Variables for each digit
@@ -515,11 +520,12 @@ int encrpt(int data, bool&inVal){
     //Return encrypted data
     return eData;
 }
-int decrpt(int eData, bool&inVal){
+int decrpt(int eData){
     //Variables for each digit
     int dig1, dig2, dig3, dig4;
     //Encrypted data
     int data;
+    
     
     //Assign each digit to respective places
     dig1 = (eData/1000);
@@ -527,8 +533,19 @@ int decrpt(int eData, bool&inVal){
     dig3 = (eData/10) - ((dig1*100)+(dig2*10));
     dig4 = eData - ((dig1*1000)+(dig2*100)+(dig3*10));
     
+    cout << dig1 <<" " << dig2 <<" " << dig3 <<" " << dig4 <<endl;
+    
+    dig1 -=5;
+    dig2 -=5;
+    dig3 -=5;
+    dig4 -=5;
     
     
+    dig1%=10;
+    dig2%=10;
+    dig3%=10;
+    dig4%=10;
+     
     //Swap digits
     //Assign temporary variables
     int temp1 = dig1;
@@ -540,9 +557,6 @@ int decrpt(int eData, bool&inVal){
     dig3 = dig4;
     dig4 = temp2;
     
-    if(dig1 > 7 || dig2 > 7 || dig3 > 7 || dig4 >7){
-        inVal = false;
-    }
     
     //Reassign new digits to encrypted data variable
     data = (dig1*1000)+(dig2*100)+(dig3*10)+(dig4);
@@ -552,11 +566,71 @@ int decrpt(int eData, bool&inVal){
 }
 
 void problem5(){
+    
+    cls();
+    signed int usrIn;
+    
     cout<<"In problem # 5"<<endl<<endl;
+    
+    do{
+        /*
+        cout <<"Enter a number: ";
+        cin >> usrIn;
+
+        for (int i = usrIn-1; i > 0; i--){
+            usrIn*=i;
+        }  
+
+        cout <<"Factorial: " <<usrIn <<endl
+         */
+        
+        cout <<"Answers" <<endl
+                <<"Short: 15! = 22528" <<endl
+                <<"Int: 31! = 738197504" <<endl
+                << "Long: 31! = 738197504" <<endl
+                <<"float: 34.99! = 3.03916e+38" <<endl
+                <<"double: 170.99! = 7.3001e+306" <<endl
+                <<"unsigned: 33! = 2147483648" <<endl
+                <<"signed: 31! = 738197504" <<endl;
+        cout <<"=============================" <<endl
+                <<"Enter -1 to quit: ";
+        cin >> usrIn;
+    
+    }while(usrIn != -1);
+    
+    //Answers
+    //Short: 15! = 22528
+    //Int: 31! = 738197504
+    //Long: 31! = 738197504
+    //float: 34.99! = 3.03916e+38
+    //double: 170.99! = 7.3001e+306
+    //unsigned: 33! = 2147483648
+    //signed: 31! = 738197504
 }
 
 void problem6(){
+    int usrIn;
+    
+    cls();
+    do{
+        
     cout<<"In problem # 6"<<endl<<endl;
+    cout <<"Answers" <<endl
+            <<"2.125" <<endl
+            <<"Binary: 10.0001" <<endl
+            <<"Octal: 2.1" <<endl
+            <<"Hex: 2.2" <<endl
+            <<endl
+            <<"0.06640625" <<endl
+            <<"Binary: " <<endl
+            <<"Octal: " <<endl
+            <<"Hex: " <<endl;
+            
+    cout <<"=============================" <<endl
+                <<"Enter -1 to quit: ";
+        cin >> usrIn;
+    
+    }while(usrIn != -1);
 }
 
 void def(int inN){
