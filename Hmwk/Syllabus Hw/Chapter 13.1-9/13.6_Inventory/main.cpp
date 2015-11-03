@@ -40,25 +40,63 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     Inv stock;
+    bool inVal;
     float ans;
     
-    cout <<"Enter item number: ";
-    cin >> ans;
-    stock.setNItm(static_cast<int>(ans));
+    do{
+        inVal=true;
+        
+        cout <<"Enter item number: ";
+        cin >> ans;
+        
+        if(ans > -1){
+            stock.setNItm(static_cast<int>(ans));
+        }
+        else{
+            cout <<"Invalid Input! Number must be positive!" <<endl;
+            inVal = false;
+        }
+    }while(!inVal);
     
-    cout <<"Enter quantity: ";
-    cin >> ans;
-    stock.setQty(static_cast<int>(ans));
+    do{
+        inVal=true;
+        
+        cout <<"Enter quantity: ";
+        cin >> ans;
+        
+        if(ans > -1){
+            stock.setQty(static_cast<int>(ans));
+        }
+        else{
+            cout <<"Invalid Input! Number must be positive!" <<endl;
+            inVal = false;
+        }
+    }while(!inVal);
     
-    cout <<"Enter item cost: ";
-    cin >> ans;
-    stock.setCst(ans);
+    do{
+        inVal=true;
+        
+        cout <<"Enter item cost: ";
+        cin >> ans;
+        
+        if(ans > -1){
+            stock.setCst(ans);
+        }
+        else{
+            cout <<"Invalid Input! Number must be positive!" <<endl;
+            inVal = false;
+        }
+    }while(!inVal);
     
+    stock.setTot();
     
-    
-    
-    
-    
+    cout  <<endl <<endl <<endl
+            <<fixed <<setprecision(2) <<"Item #" <<stock.getNItm() <<endl
+            <<"---------------------------------" <<endl
+            <<"Qty: " <<stock.getQty() <<endl
+            <<"Cost: $" <<stock.getCst() <<endl
+            <<"Total: $" <<stock.getTot() <<endl
+            <<"---------------------------------" <<endl;
 
     return 0;
 }
