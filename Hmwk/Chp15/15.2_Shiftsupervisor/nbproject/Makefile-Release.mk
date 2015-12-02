@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/_ext/1554752964/Emplye.o \
+	${OBJECTDIR}/Sprvisr.o \
 	${OBJECTDIR}/main.o
 
 
@@ -67,6 +68,11 @@ ${OBJECTDIR}/_ext/1554752964/Emplye.o: ../15.1_EmplyeeStaffClass/Emplye.cpp
 	${MKDIR} -p ${OBJECTDIR}/_ext/1554752964
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/1554752964/Emplye.o ../15.1_EmplyeeStaffClass/Emplye.cpp
+
+${OBJECTDIR}/Sprvisr.o: Sprvisr.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Sprvisr.o Sprvisr.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

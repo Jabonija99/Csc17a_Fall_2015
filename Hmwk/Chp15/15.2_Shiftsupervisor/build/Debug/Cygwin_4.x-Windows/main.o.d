@@ -1,5 +1,5 @@
-build/Debug/Cygwin_4.x-Windows/main.o: main.cpp Emplye.h Wrkr.h
+build/Debug/Cygwin_4.x-Windows/main.o: main.cpp Emplye.h Sprvisr.h
 
 Emplye.h:
 
-Wrkr.h:
+Sprvisr.h:
