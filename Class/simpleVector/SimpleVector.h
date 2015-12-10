@@ -18,6 +18,7 @@ class SimpleVector
 {
 private:
    T *aptr;          // To point to the allocated array
+   T *nAptr;         // New pointer to the array
    int arraySize;    // Number of elements in the array
    void memError();  // Handles memory allocation errors
    void subError();  // Handles subscripts out of range
@@ -45,6 +46,8 @@ public:
 
    // Overloaded [] operator declaration
    T &operator[](const int &);
+   
+   void pushEle(T nEle);
 };
 
 //***********************************************************
@@ -153,5 +156,9 @@ T &SimpleVector<T>::operator[](const int &sub)
       subError();
    return aptr[sub];
 }
+
+template <class T>
+T void
+
 #endif
 

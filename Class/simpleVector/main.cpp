@@ -11,8 +11,7 @@
 using namespace std;
 
 /*
- * Create a program that calculates n(n+1)/2
- * Learn push keyword
+ * Create function member for SimpleVector that pushes in a new value
  */
 int main(int argc, char** argv) {
     int nUsr; //User number
