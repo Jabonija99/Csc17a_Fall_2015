@@ -110,15 +110,7 @@ public:
     //Returns the cap
     int invCap(){return pInv->cap;}
     //Returns max size of inv
-    int invMax(){return pInv->max;}
-    
-    
-    
-    //Returns inventory
-    Inv *gtInv(){return pInv;}
-    
-    
-    
+    int invMax(){return pInv->max;} 
 };
 
 #endif	/* PLAYER_H */

@@ -235,7 +235,9 @@ bool Game::load(Player  &user, string name){
         //Loads the saved Player to the player object
         //gFile.read(reinterpret_cast<char *>(&user), sizeof(Player));
     */
+        //If there was an error reading
         if(gFile.fail()){
+            //Throw an exception
             throw -2;
         }
         

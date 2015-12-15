@@ -173,12 +173,15 @@ void newGme(){
     Player hero(name);
     //Initiate game
     Game rpg;
-    //Save the game
-    if(!rpg.save(hero)){
-        //Prompt user if error
-        cout <<"Error: Failed to create save file!" <<endl;
-    }
-    else{
+    
+    //try to save the game
+    try{
+        //If the game fails to save
+        if(!rpg.save(hero)){
+            //Throw an exception
+            throw -1;
+        }
+        
         //Prompt successful save
         cout <<"Gave saved." <<endl;
         //Delay text
@@ -188,6 +191,10 @@ void newGme(){
         
         //Begin game
         chp1(hero, rpg);
+    
+    }catch(...){
+        //Prompt user if error
+        cout <<"Error: Failed to create save file!" <<endl;
     }
 }
 void loadGme(){
