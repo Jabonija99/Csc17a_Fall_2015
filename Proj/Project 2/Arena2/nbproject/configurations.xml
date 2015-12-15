@@ -4,6 +4,14 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Assn.h</itemPath>
+      <itemPath>Boss.h</itemPath>
+      <itemPath>Brute.h</itemPath>
+      <itemPath>Enemy.h</itemPath>
+      <itemPath>Game.h</itemPath>
+      <itemPath>Inv.h</itemPath>
+      <itemPath>Knght.h</itemPath>
+      <itemPath>Mage.h</itemPath>
       <itemPath>Person.h</itemPath>
       <itemPath>Player.h</itemPath>
     </logicalFolder>
@@ -14,6 +22,13 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Assn.cpp</itemPath>
+      <itemPath>Boss.cpp</itemPath>
+      <itemPath>Brute.cpp</itemPath>
+      <itemPath>Enemy.cpp</itemPath>
+      <itemPath>Game.cpp</itemPath>
+      <itemPath>Knght.cpp</itemPath>
+      <itemPath>Mage.cpp</itemPath>
       <itemPath>Player.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -39,6 +54,36 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Assn.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Assn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Boss.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Boss.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Brute.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Brute.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Enemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Enemy.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Game.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Game.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Inv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Knght.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Knght.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Mage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Mage.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Person.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
@@ -68,6 +113,36 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Assn.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Assn.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Boss.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Boss.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Brute.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Brute.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Enemy.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Enemy.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Game.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Game.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Inv.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Knght.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Knght.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Mage.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Mage.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Person.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">

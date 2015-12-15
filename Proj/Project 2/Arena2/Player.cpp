@@ -13,7 +13,7 @@
 using namespace std;
 
 #include "Person.h" //Base person class
-#include "Player.h"
+#include "Player.h" //Player class
 
 
 Player::Player(){
@@ -51,42 +51,91 @@ Player::Player(){
     pDead = false;
     //Sets block flag
     pBlck = false;
+    
+    //Create new inventory
+    pInv = new Inv;
+    //Create player inventory
+    crtInv();
 }
 Player::Player(string name){
     //Blank player name
     pName = name;
     
-    //Sets Maximum health
-    pStat[S_MHLTH] = 100;
-    //Sets current health
-    pStat[S_CHLTH] = 100;
-    //Sets stamina
-    pStat[S_STMNA] = 20;
+    //Special name stats
+    if(name == "God"){
+        //Sets Maximum health
+        pStat[S_MHLTH] = 100;
+        //Sets current health
+        pStat[S_CHLTH] = 100;
+        //Sets stamina
+        pStat[S_STMNA] = 100;
+
+        //Sets strength
+        pStat[S_STR] = 100;
+        //Sets defense
+        pStat[S_DEF] = 0;
+        //Sets accuracy
+        pStat[S_ACC] = 100;
+        //Sets dexterity
+        pStat[S_DEX] = 100;
+        //Sets intelligence
+        pStat[S_INT] = 100;
+        //Sets luck
+        pStat[S_LUC] = 10;
+
+        //Sets maxiumum exp
+        pStat[S_MEXP] = 100;
+        //Sets current exp
+        pStat[S_CEXP] = 0;
+        //Sets player level
+        pStat[S_LVL] = 99;
+    }
+    //Regular character
+    else{
+        //Sets Maximum health
+        pStat[S_MHLTH] = 100;
+        //Sets current health
+        pStat[S_CHLTH] = 100;
+        //Sets stamina
+        pStat[S_STMNA] = 20;
+
+        //Sets strength
+        pStat[S_STR] = 20;
+        //Sets defense
+        pStat[S_DEF] = 5;
+        //Sets accuracy
+        pStat[S_ACC] = 85;
+        //Sets dexterity
+        pStat[S_DEX] = 10;
+        //Sets intelligence
+        pStat[S_INT] = 10;
+        //Sets luck
+        pStat[S_LUC] = 10;
+
+        //Sets maxiumum exp
+        pStat[S_MEXP] = 100;
+        //Sets current exp
+        pStat[S_CEXP] = 0;
+        //Sets player level
+        pStat[S_LVL] = 1;
+        
+    }
     
-    //Sets strength
-    pStat[S_STR] = 20;
-    //Sets defense
-    pStat[S_DEF] = 5;
-    //Sets accuracy
-    pStat[S_ACC] = 85;
-    //Sets dexterity
-    pStat[S_DEX] = 10;
-    //Sets intelligence
-    pStat[S_INT] = 10;
-    //Sets luck
-    pStat[S_LUC] = 10;
-    
-    //Sets maxiumum exp
-    pStat[S_MEXP] = 100;
-    //Sets current exp
-    pStat[S_CEXP] = 0;
-    //Sets player level
-    pStat[S_LVL] = 1;
     
     //Sets death flag
     pDead = false;
     //Sets block flag
     pBlck = false;
+    
+    //Create new inventory
+    pInv = new Inv;
+    //Create player inventory
+    crtInv();
+}
+void Player::mStat(int index, int val){
+    pStat[index] += val;
+    
+    chckhp();
 }
 int Player::attck(){
     //Generates a random number from 0 - 100 for crit %
@@ -166,6 +215,9 @@ int Player::heal(){
         //Applies heal to current health
         pStat[S_CHLTH] += hl;
         
+        //Check Hp
+        chckhp();
+        
         //Decrement stamina
         pStat[S_STMNA] -= 10;
         
@@ -199,4 +251,93 @@ bool Player::setExp(int exp){
     //Returns false for level up
     return false;
 }
+void Player::crtInv(){
+    //Inventory
+    pInv->max = 5; //Max cap
+    pInv->cap = 0; //Capacity
+    pInv->size = 0; //Size
+    //Creates inventory array
+    pInv->stck = new int[pInv->max];
+    //Fills the inventory
+    fillInv();
+}
+void Player::fillInv(){
+    //For the maximum size of the array
+    for(int i = 0; i < pInv->max; i++){
+        //Fill array with zeros
+        pInv->stck[i] = 0;
+    }
+}
+ void Player::setItm(int itm, int slot){
+     //If inv is not empty
+    if(pInv->size > 0){
+        //Set item to current slot
+        pInv->stck[slot] = itm;
+    }
+ }
+bool Player::setItm(int itm){
+    //If there is enough room
+    if(pInv->size < pInv->cap){
+        //Set item to current slot
+        pInv->stck[pInv->size] = itm;
+        //Increment size
+        pInv->size++;
+        //Return confirm
+        return true;
+    }
+    else{
+        //Returns error
+        return false;
+    }
+}
+void Player::remItm(int numItm){
+    //Set item number to zero
+    pInv->stck[numItm] = 0;
+    
+    //Sort inventory
+    for(int i = 0; i < pInv->size; i++){
+        for(int j = i; j < pInv->size - 1; j++){
+            if(pInv->stck[j] < pInv->stck[j+1]){
+                int temp = pInv->stck[j];
+                pInv->stck[j] = pInv->stck[j+1];
+                pInv->stck[j+1] = temp;
+            }
+        }
+    }
+    
+    //Decrement size
+    pInv->size--;
+}
 
+int Player::getItm(int val){
+    switch(val){
+        case 0:
+            //Returns item 1
+            return pInv->stck[0];
+            break;
+        case 1:
+            //Returns item 2
+            return pInv->stck[1];
+            break;
+        case 2:
+            //Returns item 3
+            return pInv->stck[2];
+            break;
+        case 3:
+            //Returns item 4
+            return pInv->stck[3];
+            break;
+        case 4:
+            //Returns item 5
+            return pInv->stck[4];
+            break;
+    }
+}
+
+void Player::chckhp(){
+    //If the current health is greater than the max hp
+    if(pStat[S_CHLTH] > pStat[S_MHLTH]){
+        //Sets current hp to max
+        pStat[S_CHLTH] = pStat[S_MHLTH];
+    }
+}

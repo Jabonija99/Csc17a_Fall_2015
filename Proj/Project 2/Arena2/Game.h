@@ -2,15 +2,12 @@
  * File:   Game.h
  * Author: Kauru99
  *
- * Created on October 14, 2015, 9:15 PM
+ * Created on December 11, 2015, 10:04 PM
  */
 
 #include <string>
 #include <fstream>
 #include "Player.h"
-#include "Inv.h"
-
-using namespace std;
 
 #ifndef GAME_H
 #define	GAME_H
@@ -20,11 +17,9 @@ private:
     //Int for game completion and checkpoint for the player's location
     int gCmplte, gChckpt;
     //File name
-    string gFile;
-    //Load File
-    ifstream gLoad;
-    //Save File
-    ofstream gSave;
+    string gFlNme;
+    //File input and output
+    fstream gFile;
     
 public:
     //Base constructor

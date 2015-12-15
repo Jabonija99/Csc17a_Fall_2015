@@ -23,7 +23,7 @@ public:
     //Constructor with parameters
     Person(string name){pName = name;}
     //Assigns an array of characters to the name
-    void stName(char name[]){pName = name;}
+    void stName(string name){pName = name;}
     //Returns the name
     string gtName(){return pName;}
 };

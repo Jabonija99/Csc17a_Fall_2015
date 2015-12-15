@@ -13,12 +13,13 @@
 using namespace std;
 
 #include "Person.h" //Base person class
+#include "Inv.h" //Inventory class
 
 #ifndef PLAYER_H
 #define	PLAYER_H
 
 //Enumeration for stats
-enum Stats{
+enum PStats{
     S_MHLTH, //Maximum health
     S_CHLTH, //Current health
     S_STMNA, //Stamina
@@ -34,7 +35,7 @@ enum Stats{
     S_SIZE //Stat size        
 };
 
-//Player class 
+//Player class inherited from person class
 class Player:public Person{
 private:
     //Array of player stats
@@ -44,6 +45,14 @@ private:
     int pStun=0;
     //Flag for player death and guard
     bool pDead, pBlck;
+    
+    //Player inventory
+    Inv *pInv;
+    //Function to fill inventory
+    void fillInv();
+    //Checks current hp with max
+    void chckhp();
+    
 public:
     //Base constructor
     Player();
@@ -51,11 +60,13 @@ public:
     Player(string);
     
     //Sets the indicated stat with the given value
-    void stStat(Stats index, int val){pStat[index] = val;}
+    void stStat(int index, int val){pStat[index] = val;}
     //Modifies the indicated state with the given value
-    void mStat(Stats index, int val){pStat[index] += val;}
+    void mStat(int index, int val);
     //Returns the indicated stat
-    int gtStat(Stats index){return pStat[index];}
+    int gtStat(int index){return pStat[index];}
+    //Returns the stat size
+    int gtStSze(){return S_SIZE;}
     
     //Calculates and returns damage
     int attck();
@@ -74,6 +85,40 @@ public:
     
     //Calculates added exp
     bool setExp(int);
+    
+    //Creates inventory
+    void crtInv(); 
+    //Increases inventory size to the indicated value
+    void incInv(int val){pInv->cap = val;}
+    //Sets item to indicated slot *Does not adjust size*
+    void setItm(int, int); 
+    //Sets item to last inventory slot
+    bool setItm(int);
+    //Removes indicated item
+    void remItm(int);
+    
+    //Sets the inventory capacity
+    void stCap(int val){pInv->cap = val;}
+    //Sets inventory size
+    void stSze(int val){pInv->size = val;}
+    
+    
+    //Returns indicated item
+    int getItm(int); 
+    //Returns the inventory size
+    int invSze(){return pInv->size;}
+    //Returns the cap
+    int invCap(){return pInv->cap;}
+    //Returns max size of inv
+    int invMax(){return pInv->max;}
+    
+    
+    
+    //Returns inventory
+    Inv *gtInv(){return pInv;}
+    
+    
+    
 };
 
 #endif	/* PLAYER_H */
