@@ -23,7 +23,7 @@ public:
     void dAtt()
     {cout <<pName <<" thrusts his daggers towards your blind spots!" <<endl;}
     //Dialogue when defending
-    void dDef(){cout <<pName <<"'s shadows rise between you!" <<endl;}
+    void dDef(){cout <<pName <<"'s shadow rises between you!" <<endl;}
     //Dialogue when getting stunned
     void dStn(){cout <<pName <<" is knocked back by your shield!" <<endl;}
     //Dialogue when stunned

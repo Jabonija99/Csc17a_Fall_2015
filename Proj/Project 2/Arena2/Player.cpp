@@ -53,7 +53,7 @@ Player::Player(){
     pBlck = false;
     
     //Create new inventory
-    pInv = new Inv;
+    pInv = new Inv<int>;
     //Create player inventory
     crtInv();
 }
@@ -128,13 +128,15 @@ Player::Player(string name){
     pBlck = false;
     
     //Create new inventory
-    pInv = new Inv;
+    pInv = new Inv<int>;
     //Create player inventory
     crtInv();
 }
 void Player::mStat(int index, int val){
+    //Increments value to indexed stat
     pStat[index] += val;
     
+    //Checks hp
     chckhp();
 }
 int Player::attck(){
@@ -161,7 +163,7 @@ int Player::attck(){
 
 }
 int Player::dmged(int eAtt){
-int dodge = rand()%101; //Calculates a number for dodge chance
+    int dodge = rand()%101; //Calculates a number for dodge chance
     int dmg = eAtt - pStat[S_DEF]; //Calculates damage
     
     //If the damage is less than 0
@@ -294,7 +296,7 @@ void Player::remItm(int numItm){
     //Set item number to zero
     pInv->stck[numItm] = 0;
     
-    //Sort inventory
+    //Sorts inventory
     for(int i = 0; i < pInv->size; i++){
         for(int j = i; j < pInv->size - 1; j++){
             if(pInv->stck[j] < pInv->stck[j+1]){
@@ -310,6 +312,7 @@ void Player::remItm(int numItm){
 }
 
 int Player::getItm(int val){
+    //Retrieves the indicated item
     switch(val){
         case 0:
             //Returns item 1

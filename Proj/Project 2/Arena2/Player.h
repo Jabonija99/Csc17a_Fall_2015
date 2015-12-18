@@ -47,7 +47,7 @@ private:
     bool pDead, pBlck;
     
     //Player inventory
-    Inv *pInv;
+    Inv<int> *pInv;
     //Function to fill inventory
     void fillInv();
     //Checks current hp with max

@@ -13,9 +13,7 @@
 using namespace std;
 
 #include "Game.h" //Game class
-#include "Person.h" //Base person class
 #include "Player.h" //Player class
-#include "Enemy.h" //Enemy class
 
 #include "Brute.h" //Brute enemy
 #include "Mage.h" //Mage enemy
@@ -57,7 +55,7 @@ void arena(Player&, Game&, bool&);
 void shop(Player&, Game&);
 
 
-//Templated class
+//Templated function
 template<class T>
 //Battle ui
 void bttlUi(Player&, T&, bool&);
@@ -225,7 +223,9 @@ void loadGme(){
         
         //Prompt user when successful
         cout <<"Load successful"<<endl;
+        //Delay text
         delay(4);
+        //Clear screen
         cls();
         
         //Load level from game checkpoint
@@ -259,6 +259,7 @@ void loadGme(){
                 chp1(hero,rpg);
                 break;
             default:
+                //Return to main
                 return;
         }
     
@@ -301,10 +302,12 @@ void level(Player&hero, Game&rpg, bool&lvComp){
         //Processes user choice
         switch(ans){
             case 1:
+                //Clear screen
                 cls();
                 //Heals player
                 hero.mStat(CHLTH, hpDif);
                 
+                //Try to save game
                 try{
                     //If the game does not save successfully
                     if(!rpg.save(hero)){
@@ -432,9 +435,9 @@ void shop(Player &hero, Game &rpg){
     //Quit flag
     bool quit = false;
     //Structure object pointer
-    Inv *sInv;
+    Inv<int> *sInv;
     //Create new inventory
-    sInv = new Inv;
+    sInv = new Inv<int>;
     
     //Loads inventory based on checkpoint
     switch(rpg.getChckpt()){
@@ -597,7 +600,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                 //Reset stunned state
                 pstun = false;
                 //Delay text
-                delay(4);
+                delay(5);
             }
             else{
                 //Prompt user
@@ -616,7 +619,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                         //Prompt user attack
                         cout <<hero.gtName() <<" attacks!" <<endl;
                         //Delay text
-                        delay(4);
+                        delay(5);
 
                         //If the enemy is blocking
                         if(foe.blck()){
@@ -628,7 +631,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                                 //Flag stunned state
                                 pstun = true;
                                 //Delay text
-                                delay(4);
+                                delay(5);
                             }
                             else{
                                 //Print reduced damage
@@ -636,7 +639,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                                         <<foe.dmged(hero.attck() - 2) 
                                         <<" damage!" <<endl;
                                 //Delay text
-                                delay(4);
+                                delay(5);
                             }
 
                             //Reset enemy guard state
@@ -648,7 +651,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                                     <<foe.dmged(hero.attck())
                                     <<" damage!" <<endl;
                             //Delay text
-                            delay(4);
+                            delay(5);
                         }
 
                         //Reset player guard state
@@ -663,7 +666,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                         hero.guard(true);
                         cout <<hero.gtName() <<" raises his guard!" <<endl;
                         //Delay text
-                        delay(4);
+                        delay(5);
                         break;
                     case 3:
                         //Call item use function
@@ -693,7 +696,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                 //Reset stun flag
                 estun = false;
                 //Delay text
-                delay(4);
+                delay(6);
             }
             else{
 
@@ -707,7 +710,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                         //Prompt enemy attack
                         foe.dAtt();
                         //Delay text
-                        delay(4);
+                        delay(5);
                         //If the player is blocking
                         if(hero.blck()){
                             //Calculate stun chances
@@ -716,7 +719,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                                 foe.dStn();
                                 estun = true;
                                 //Delay text
-                                delay(4);
+                                delay(5);
                             }
                             else{
                                 //Print reduced damage
@@ -724,7 +727,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                                         <<hero.dmged(foe.attck() - 2) 
                                         <<" damage!" <<endl;
                                 //Delay text
-                                delay(4);
+                                delay(5);
                             }
 
                             //Reset block status
@@ -736,7 +739,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                                     <<hero.dmged(foe.attck())
                                     <<" damage!" <<endl;
                             //Delay text
-                            delay(4);
+                            delay(5);
                         }
                         
                         //Reset enemy guard state
@@ -752,7 +755,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                         //Output defense dialogue
                         foe.dDef();
                         //Delay text
-                        delay(4);
+                        delay(5);
                         break;
                     case 3:
                         //Clear screen
@@ -766,7 +769,7 @@ void bttlUi(Player &hero,T &foe, bool &lvComp){
                         foe.guard(false);
                         
                         //Delay text
-                        delay(4);
+                        delay(5);
                         break;
                     default:
                         //Prompt invalid input
@@ -823,7 +826,7 @@ void ui(string title, Player hero, Enemy foe){
             <<"============================" <<endl
             //Hero name
             <<left <<hero.gtName() 
-            <<right <<setw(50)
+            <<right <<setw(52)
             //Enemy name
             <<foe.gtName() <<endl
             //Hero current/max hp
@@ -1087,11 +1090,6 @@ void chp1(Player&hero, Game&rpg){
     if(rpg.getCmplte() < 1){
         //Initiate dialogue
         
-        cout <<"<Intro text>" <<endl;
-        delay(7);
-        cls();
-        
-        
         cout <<"Chapter 1: Arrival" <<endl;
         delay(6);
         cls();
@@ -1118,8 +1116,21 @@ void chp1(Player&hero, Game&rpg){
     else{
         //Dialogue
         
-   
+        //Prompt shop unlock
+        cout <<"Shop unlocked!" <<endl;
+        delay(4);
+        cout <<"Shop now sells health potions!" <<endl;
+        delay(6);
+        cls();
         
+        //Prompt inventory increase
+        cout <<"Pack earned!" <<endl;
+        delay(4);
+        cout <<"Inventory size increased to 3!" <<endl;
+        delay(6);
+        cls();
+
+        //Increase inventory by 3
         hero.incInv(3);
         //Increment percentage completed
         rpg.modCmplte(10); //Total: 11
@@ -1181,6 +1192,17 @@ void chp2(Player&hero, Game&rpg){
     }
     else{
         //Dialogue
+        //Prompt glove earned
+        cout <<"The mystic's glove vanishes from the floor!" <<endl;
+        delay(7);
+        cout <<"Mystic glove unlocked!" <<endl;
+        delay(5);
+        cls();
+        
+        //Prompt inventory increase
+        cout <<"Inventory increased to 4!" <<endl;
+        delay(6);
+        cls();
         
         //Increase player inventory
         hero.incInv(4);
@@ -1239,6 +1261,10 @@ void chp3(Player&hero, Game&rpg){
     }
     else{
         //Dialogue
+        //Prompt inventory increase
+        cout <<"Inventory increased to 5!" <<endl;
+        delay(5);
+        cls();
         
         //Increase player inventory
         hero.incInv(5);

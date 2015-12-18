@@ -6,13 +6,30 @@
  */
 
 #include <cstdlib>
+#include <string.h>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 
 using namespace std;
 
 //User Libraries
+
+//Problem 1
 #include "Prob1Random.h"
+//Problem 2
+#include "Prob2Sort.h"
+//Problem 3
+#include "Prob3Table.h"
+#include "Prob3TableInherited.h"
+//Problem 4
+#include "AccSve.h"
+//Problem 5
+#include "Emplye.h"
+
+
+
+
 
 //Global Constants
 
@@ -117,11 +134,13 @@ void problem2(){
     
     //Open text file
     infile.open("Problem2.txt",ios::in);
+    
     //Creates multidimensional array 10x16
     char *ch2=new char[10*16];
     //Pointer
     char *ch2p=ch2;
     
+    //Retrieve words from text
     while(infile.get(*ch2)){cout<<*ch2;ch2++;}
     infile.close();
     
@@ -129,7 +148,8 @@ void problem2(){
     cout<<"Sorting on which column"<<endl;
     int column;
     cin>>column;
-    char *zc=rc.sortArray(ch2p,10,16,column,ascending);
+    //Create sorted array
+    char *zc=rc.sortArray(ch2p,column,ascending);
     for(int i=0;i<10;i++)
     {
             for(int j=0;j<16;j++)
@@ -139,21 +159,115 @@ void problem2(){
     }
     delete []zc;
     cout<<endl;
+    
+    char delay;
+    cout <<"Enter anything to continue: ";
+    cin >> delay;
 }
 
 void problem3(){
-
+    cout<<"Entering problem number 3"<<endl;
+    int rows=5;
+    int cols=6;
+    
+    Prob3TableInherited<int> tab("Problem3.txt",rows,cols);
+    
+    const int *naugT=tab.getTable();
+    for(int i=0;i<rows;i++)
+    {
+            for(int j=0;j<cols;j++)
+            {
+                    cout<<naugT[i*cols+j]<<" ";
+            }
+            cout<<endl;
+    }
+    cout<<endl;
+    
+    const int *augT=tab.getAugTable();
+    for(int i=0;i<=rows;i++)
+    {
+            for(int j=0;j<=cols;j++)
+            {
+                    cout<<augT[i*(cols+1)+j]<<" ";
+            }
+            cout<<endl;
+    }
 }
+
 
 void problem4(){
-
+    AccSve mine(-300);
+    
+    for(int i=1;i<=10;i++)
+    {
+            mine.transaction((float)(rand()%500)*(rand()%3-1));
+    }
+    mine.toString();
+    cout<<"Balance after 7 years given 10% interest = "
+            <<mine.total((float)(0.10),7)<<endl;
+    cout<<"Balance after 7 years given 10% interest = "
+            <<mine.totalRecursive((float)(0.10),7)
+            <<" Recursive Calculation "<<endl;
+        
+    char delay;
+    cout <<"Enter any number to continue: ";
+    cin >> delay;
 }
+
+
+
 void problem5(){
+    Emplye Mark("Mark","Boss",215.50);
+    Mark.setHoursWorked(-3);
+    Mark.toString();
+    Mark.CalculatePay(Mark.setHourlyRate(20.0),
+            Mark.setHoursWorked(25));
+    Mark.toString();
+    Mark.CalculatePay(Mark.setHourlyRate(40.0),
+            Mark.setHoursWorked(25));
+    Mark.toString();
+    Mark.CalculatePay(Mark.setHourlyRate(60.0),
+            Mark.setHoursWorked(25));
+    Mark.toString();
 
+    Emplye Mary("Mary","VP",50.0);
+    Mary.toString();
+    Mary.CalculatePay(Mary.setHourlyRate(50.0),
+            Mary.setHoursWorked(40));
+    Mary.toString();
+    Mary.CalculatePay(Mary.setHourlyRate(50.0),
+            Mary.setHoursWorked(50));
+    Mary.toString();
+    Mary.CalculatePay(Mary.setHourlyRate(50.0),
+            Mary.setHoursWorked(60));
+    Mary.toString();
+
+    char delay;
+    cout <<"Enter anything to continue: ";
+    cin >> delay;
 }
+
+
 
 void problem6(){
-
+    cout <<"a) 0.125" <<endl
+            <<"Binary: " <<0.001 <<endl
+            <<"Octal: " <<0.1 <<endl
+            <<"Hex: " << 0.2 <<endl <<endl;
+    
+    cout <<"b) 0.3" <<endl
+            <<"Binary: " <<"0.01001" <<endl
+            <<"Octal: " <<"0.2314" <<endl
+            <<"Hex: " <<"0.4CC" <<endl <<endl;
+    
+    cout <<"c) 89.3" <<endl
+            <<"Binary: " <<"1011001.01001" <<endl
+            <<"Octal: " <<"131.2314" <<endl
+            <<"Hex: " <<"59.4CC" <<endl <<endl;
+    
+    char delay;
+    cout <<"Enter anything to continue: ";
+    cin >> delay;
 }
 
 

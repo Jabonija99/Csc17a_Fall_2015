@@ -10,11 +10,12 @@
 
 
 //Inventory structure
+template<class T>
 struct Inv{
-    int max; //Maximum cap
-    int cap; //Allowed capacity
-    int size; //Number of items
-    int *stck; //Pointer of items
+    T max; //Maximum cap
+    T cap; //Allowed capacity
+    T size; //Number of items
+    T *stck; //Pointer of items
 };
 
 

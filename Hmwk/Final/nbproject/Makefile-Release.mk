@@ -35,8 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/AccSve.o \
+	${OBJECTDIR}/Emplye.o \
 	${OBJECTDIR}/Prob1Random.o \
-	${OBJECTDIR}/Prob2Sort.o \
 	${OBJECTDIR}/main.o
 
 
@@ -64,15 +65,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/final.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/final ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/AccSve.o: AccSve.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/AccSve.o AccSve.cpp
+
+${OBJECTDIR}/Emplye.o: Emplye.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Emplye.o Emplye.cpp
+
 ${OBJECTDIR}/Prob1Random.o: Prob1Random.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Prob1Random.o Prob1Random.cpp
-
-${OBJECTDIR}/Prob2Sort.o: Prob2Sort.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Prob2Sort.o Prob2Sort.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
